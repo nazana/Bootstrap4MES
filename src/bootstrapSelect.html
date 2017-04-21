@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Select for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../dist/css/bootstrap-select.css" rel="stylesheet">
+    <style type="text/css">
+      .special {
+        font-weight: bold !important;
+        color: #fff !important;
+        background: #bc0000 !important;
+        text-transform: uppercase;
+      }
+</style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-1">
+          Basic Select          
+        </div>
+        <div class="col-md-3">
+          <select class="selectpicker">
+            <option>Mustard</option>
+            <option>Ketchup</option>
+            <option>Relish</option>
+          </select>
+        </div>
+        <div class="col-md-1">
+          Boxes
+        </div>
+        <div class="col-md-3">        
+          <select class="selectpicker">
+            <optgroup label="Picnic">
+              <option>Mustard</option>
+              <option>Ketchup</option>
+              <option>Relish</option>
+            </optgroup>
+            <optgroup label="Camping">
+              <option>Tent</option>
+              <option>Flashlight</option>
+              <option>Toilet Paper</option>
+            </optgroup>
+          </select>
+        </div>
+        <div class="col-md-1">
+          Multiselect          
+        </div>
+        <div class="col-md-3">
+          <select class="selectpicker" multiple>
+            <option>Mustard</option>
+            <option>Ketchup</option>
+            <option>Relish</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-1">
+          Live Search
+        </div>
+        <div class="col-md-3">
+          <select class="selectpicker" data-live-search="true">
+            <option>Hot Dog, Fries and a Soda</option>
+            <option>Burger, Shake and a Smile</option>
+            <option>Sugar, Spice and all things nice</option>
+          </select>
+        </div>
+        <div class="col-md-1">
+          Keyword Search
+        </div>
+        <div class="col-md-3">
+          <select class="selectpicker" data-live-search="true">
+            <option data-tokens="ketchup mustard">Hot Dog, Fries and a Soda</option>
+            <option data-tokens="mustard">Burger, Shake and a Smile</option>
+            <option data-tokens="frosting">Sugar, Spice and all things nice</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-3">
+          Limit Selection          
+        </div>
+        <div class="col-md-3">
+          <select class="selectpicker" multiple data-max-options="2">
+            <option>Mustard</option>
+            <option>Ketchup</option>
+            <option>Relish</option>
+          </select>
+        </div>
+        <div class="col-md-3">
+          Limit Selection with optgroup          
+        </div>
+        <div class="col-md-3">     
+          <select class="selectpicker" multiple>
+            <optgroup label="Picnic" data-max-options="2">
+              <option>Mustard</option>
+              <option>Ketchup</option>
+              <option>Relish</option>
+            </optgroup>
+            <optgroup label="Camping" data-max-options="2">
+              <option>Tent</option>
+              <option>Flashlight</option>
+              <option>Toilet Paper</option>
+            </optgroup>
+          </select>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-1">
+          Placeholder          
+        </div>
+        <div class="col-md-1">
+          Multiple          
+        </div>
+        <div class="col-md-3">
+          <select class="selectpicker" multiple title="Choose one of the following...">
+            <option>Mustard</option>
+            <option>Ketchup</option>
+            <option>Relish</option>
+          </select>
+        </div>
+        <div class="col-md-1">
+          Standard          
+        </div>
+        <div class="col-md-3">
+          <select class="selectpicker" title="Choose one of the following...">
+            <option>Mustard</option>
+            <option>Ketchup</option>
+            <option>Relish</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-2">
+          Selected text          
+        </div>
+        <div class="col-md-3">
+          <select class="selectpicker">
+            <option title="Combo 1">Hot Dog, Fries and a Soda</option>
+            <option title="Combo 2">Burger, Shake and a Smile</option>
+            <option title="Combo 3">Sugar, Spice and all things nice</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-2">
+          Selected text format
+        </div>
+        <div class="col-md-1">
+          count
+        </div>
+        <div class="col-md-3">
+          <select class="selectpicker" multiple data-selected-text-format="count">
+            <option>Mustard</option>
+            <option>Ketchup</option>
+            <option>Relish</option>
+          </select>
+        </div>
+        <div class="col-md-1">
+          count > 3
+        </div>
+        <div class="col-md-3">
+          <select class="selectpicker" multiple data-selected-text-format="count > 3">
+            <option>Mustard</option>
+            <option>Ketchup</option>
+            <option>Relish</option>
+            <option>Onions</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-1 col-md-offset-2">
+          static
+        </div>
+        <div class="col-md-3">
+          <select class="selectpicker" multiple title="similar button" data-selected-text-format="static">
+            <option>Mustard</option>
+            <option>Ketchup</option>
+            <option>Relish</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-2">
+          Button classes
+        </div>
+        <div class="col-md-2">
+          <select class="selectpicker" data-style="btn-primary">
+            <option>Mustard</option>
+            <option>Ketchup</option>
+            <option>Relish</option>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <select class="selectpicker" data-style="btn-info">
+            <option>Mustard</option>
+            <option>Ketchup</option>
+            <option>Relish</option>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <select class="selectpicker" data-style="btn-success">
+            <option>Mustard</option>
+            <option>Ketchup</option>
+            <option>Relish</option>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <select class="selectpicker" data-style="btn-warning">
+            <option>Mustard</option>
+            <option>Ketchup</option>
+            <option>Relish</option>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <select class="selectpicker" data-style="btn-danger">
+            <option>Mustard</option>
+            <option>Ketchup</option>
+            <option>Relish</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-2">
+          Checkmark on selected option
+        </div>
+        <select class="selectpicker show-tick col-md-4">
+          <option>Mustard</option>
+          <option>Ketchup</option>
+          <option>Relish</option>
+        </select>
+        <div class="col-md-2">
+          Menu arrow
+        </div>
+        <select class="selectpicker show-menu-arrow col-md-4">
+          <option>Mustard</option>
+          <option>Ketchup</option>
+          <option>Relish</option>
+        </select>
+        
+      </div>
+      
+      <div class="row">
+        <div class="col-md-2">
+          Style individual options
+        </div>
+        <select class="selectpicker col-md-4">
+          <option>Mustard</option>
+          <option class="special">Ketchup</option>
+          <option style="background: #5cb85c; color: #fff;">Relish</option>
+        </select>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-12">
+          <h1>Width</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class=" col-md-4">
+          <div class="form-group">
+            <select class="selectpicker form-control">
+              <option>Mustard</option>
+              <option class="special">Ketchup</option>
+              <option style="background: #5cb85c; color: #fff;">Relish</option>
+            </select>
+          </div>
+        </div>
+        <div class=" col-md-8">
+          <div class="form-group">
+            <select class="selectpicker form-control">
+              <option>Mustard</option>
+              <option class="special">Ketchup</option>
+              <option style="background: #5cb85c; color: #fff;">Relish</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class=" col-md-6 form-group">
+<!--          <div class="form-group">-->
+            <select class="selectpicker form-control">
+              <option>Mustard</option>
+              <option class="special">Ketchup</option>
+              <option style="background: #5cb85c; color: #fff;">Relish</option>
+            </select>
+<!--          </div>-->
+        </div>
+        <div class=" col-md-6 form-group">
+<!--          <div class="form-group">-->
+            <select class="selectpicker form-control">
+              <option>Mustard</option>
+              <option class="special">Ketchup</option>
+              <option style="background: #5cb85c; color: #fff;">Relish</option>
+            </select>
+<!--          </div>-->
+        </div>
+      </div>
+      <div class="row">
+        <div class=" col-md-8">
+          <div class="form-group">
+            <select class="selectpicker form-control">
+              <option>Mustard</option>
+              <option class="special">Ketchup</option>
+              <option style="background: #5cb85c; color: #fff;">Relish</option>
+            </select>
+          </div>
+        </div>
+        <div class=" col-md-4">
+          <div class="form-group">
+            <select class="selectpicker form-control">
+              <option>Mustard</option>
+              <option class="special">Ketchup</option>
+              <option style="background: #5cb85c; color: #fff;">Relish</option>
+            </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="../dist/js/bootstrap.min.js"></script>
+    <script src="../dist/js/bootstrap-select.min.js"></script>
+  </body>
+</html>

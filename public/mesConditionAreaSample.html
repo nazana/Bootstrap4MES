@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="kr">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Mes Condition Area Sample</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="../css/bootstrap.css" rel="stylesheet">
+  <link href="../css/bootstrap-select.css" rel="stylesheet">
+  <style>
+    .fill {
+      min-height: 100%;
+      height: 100%;
+    }
+    
+    .condition {
+      min-height: 100%;
+      max-width: 1366px;
+    }
+    
+    #conditionArea .row,
+    #conditionArea .well .row {
+      min-height: 100%;
+      max-width: 1366px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    #conditionArea .well, #conditionArea .collapsing  {
+      margin-left: -15px;
+      margin-right: -15px;
+      border-radius: 0px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+
+.bootstrap-select.form-control {
+  margin-bottom: 0;
+  padding: 0;
+  border: none;
+  /* 심경보 추가. 버튼사이즈 변경시 주변부 사이즈가 변경 안됨. 2017.04.13 */
+  height: auto;
+}
+    
+/* 심경보 추가. form-group으로 사이즈 조정시 dropdown-menu 사이즈를 상속받음. 2017-04-17*/
+.form-group-lg .bootstrap-select.btn-group.form-control .dropdown-menu,
+.form-group-sm .bootstrap-select.btn-group.form-control .dropdown-menu {
+  font-size: inherit;
+}
+
+/* 심경보 추가. form-group으로 사이즈 조정시 포함된 Label 사이즈를 설정. 2017-04-17*/
+.form-group-lg > label {
+  padding-top: 11px;
+  font-size: inherit;
+}
+
+.form-group-sm > label {
+  padding-top: 6px;
+  font-size: inherit;
+}
+
+  </style>
+</head>
+
+<body>
+ <div data-role="page">
+   <div data-role="header">
+     <H1>rara</H1>
+   </div>
+ </div>
+  <div class="container-fluid">
+    <div class="row">
+      <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#conditionArea"><span class="glyphicon glyphicon-search"></span></button>
+    </div>
+    <div id="conditionArea" class="collapse in">
+      <div class="well">
+        <div class="row">
+          <div class="col-md-4 col-sm-4">
+            <div class="form-group form-group-sm">
+              <label for="FacOpCd">공장</label>
+              <select id="FacOpCd" class="selectpicker form-control"> <!-- data-style="btn-default btn-sm"> -->
+                  <option>1연주</option>
+                  <option>2연주</option>
+                  <option>3연주</option>
+                </select>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-4">
+            <div class="form-group">
+              <label for="McNo">Machine No</label>
+              <select id="McNo" class="selectpicker form-control" data-style="btn-default btn-sm">
+                  <option>1M/C</option>
+                  <option>2M/C</option>
+                  <option>3M/C</option>
+                  <option>4M/C</option>
+                </select>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-4 form-group">
+            <label for="MtlNo">재료번호</label>
+            <select class="selectpicker form-control" data-live-search="true" data-size="10" data-style="btn-default btn-sm">
+                  <option>SA00001</option>
+                  <option>SA00002</option>
+                  <option>SA00003</option>
+                  <option>SA00004</option>
+                  <option>SA00005</option>
+                  <option>SA00006</option>
+                  <option>SA00007</option>
+                  <option>SA00008</option>
+                  <option>SA00009</option>
+                  <option>SA00010</option>
+                  <option>SA00011</option>
+                  <option>SA00012</option>
+                  <option>SA00013</option>
+                  <option>SA00014</option>
+                  <option>SA00015</option>
+                  <option>SA00016</option>
+                  <option>SA00017</option>
+                  <option>SA00018</option>
+                  <option>SA00019</option>
+                  <option>SA00020</option>
+                  <option>SA00021</option>
+                  <option>SA00022</option>
+                  <option>SA00023</option>
+                  <option>SA00024</option>
+                  <option>SA00025</option>
+                  <option>SA00026</option>
+                  <option>SA00027</option>
+                  <option>SA00028</option>
+                  <option>SA00029</option>
+                  <option>SA00030</option>
+                </select>
+          </div>
+          <!--        </div>-->
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <button id="find" type="submit" class="btn btn-success btn-lg btn-block"><span class="glyphicon glyphicon-search"></span></button>
+          </div>
+<!--
+          <div class="col-xs-6">
+            <button id="save" type="submit" class="btn btn-primary form-control"><span class="glyphicon glyphicon-save">SAVE</span></button>
+          </div>
+-->
+        </div>
+<!--
+        <HR>
+        <div class="row">
+          <div class="col-xs-6">
+            <div class="form-group">
+              <button id="find" type="submit" class="btn btn-primary form-control"><span class="glyphicon glyphicon-search">FIND</span></button>
+            </div>
+          </div>
+          <div class="col-xs-6">
+            <div class="form-group">
+              <button id="save" type="submit" class="btn btn-primary form-control"><span class="glyphicon glyphicon-save">SAVE</span></button>
+            </div>
+          </div>
+        </div>
+-->
+      </div>
+    </div>
+  </div>
+            <div class="form-group form-group-sm">
+              <select id="FacOpCd" class="selectpicker form-control"> <!-- data-style="btn-default btn-lg btn-block"> -->
+                <option>1연주</option>
+                <option>2연주</option>
+                <option>3연주</option>
+              </select>
+            </div>
+<!--  
+            <div class="form-group">
+              <select id="FacOpCd" class="form-control input-lg">
+                <option>1연주</option>
+                <option>2연주</option>
+                <option>3연주</option>
+              </select>
+            </div>
+  <div class="container-fluid hide">
+    <div class="well">
+      <div class="row">
+        <div class="col-md-4 col-sm-4">
+          <div class="form-group">
+            <label for="MtlNo">공장</label>
+            <select class="selectpicker form-control" multiple>
+                <optgroup label="공장" data-max-options="1">
+                  <option>1연주</option>
+                  <option>2연주</option>
+                  <option>3연주</option>
+                </optgroup>
+                <optgroup label="Machin No" data-max-options=1>
+                  <option>1M/C</option>
+                  <option>2M/C</option>
+                  <option>3M/C</option>
+                  <option>4M/C</option>
+                </optgroup>
+              </select>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-4">
+          <div class="form-group">
+            <label for="MtlNo">Machine No</label>
+            <select class="selectpicker form-control">
+                <option>1M/C</option>
+                <option>2M/C</option>
+                <option>3M/C</option>
+                <option>4M/C</option>
+              </select>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-4 form-group">
+          <label for="MtlNo">재료번호</label>
+                    <div class="form-group">
+          <select id="MtlNo" class="selectpicker form-control" data-live-search="true" data-size="10">
+                <option>SA00001</option>
+                <option>SA00002</option>
+                <option>SA00003</option>
+                <option>SA00004</option>
+                <option>SA00005</option>
+                <option>SA00006</option>
+                <option>SA00007</option>
+                <option>SA00008</option>
+                <option>SA00009</option>
+                <option>SA00010</option>
+                <option>SA00011</option>
+                <option>SA00012</option>
+                <option>SA00013</option>
+                <option>SA00014</option>
+                <option>SA00015</option>
+                <option>SA00016</option>
+                <option>SA00017</option>
+                <option>SA00018</option>
+                <option>SA00019</option>
+                <option>SA00020</option>
+                <option>SA00021</option>
+                <option>SA00022</option>
+                <option>SA00023</option>
+                <option>SA00024</option>
+                <option>SA00025</option>
+                <option>SA00026</option>
+                <option>SA00027</option>
+                <option>SA00028</option>
+                <option>SA00029</option>
+                <option>SA00030</option>
+              </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap core JavaScript
+    ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="../js/bootstrap.min.js"></script>
+  <script src="../js/bootstrap-select.js"></script>
+</body>
+
+</html>
+
+
+<!--
+select 의 List 부분은 Boostrap에서 사용하는 Select와 다르게
+Button less를 사용한다.
+그래서 select의 Size 변경시 bootstrap의 select와 마찬가지로 
+List의 Size는 변경되지 않는다.
+현재 해결 방법으로는 .dropdown-menu 부분의 수정이 필요하다는 것 정도이다.
+하지만 이 부분은 bootstrap의 것으로
+bootstrap-select의 css 부분의 변경으로 수정되어야 한다.
+아마 이부분. .bootstrap-select.btn-group .dropdown-menu에 해답이 있을 것 같다.
+사이즈별로 List에 해당되는 부분의 font size만 변경하면 찾을 수 있다.
+
+
+
+-->
