@@ -397,8 +397,11 @@
       this.$element
         .after(this.$newElement)
         .appendTo(this.$newElement);
+//      console.log(this.$newElement);
       this.$button = this.$newElement.children('button');
+//      console.log(this.$button);
       this.$menu = this.$newElement.children('.dropdown-menu');
+//      console.log(this.$menu);
       this.$menuInner = this.$menu.children('.inner');
       this.$searchbox = this.$menu.find('input');
 
@@ -488,7 +491,7 @@
           : '';
       var actionsbox = this.multiple && this.options.actionsBox ?
       '<div class="bs-actionsbox">' +
-      '<div class="btn-group btn-group-sm btn-block">' +
+      '<div class="btn-group btn-group-lg btn-block">' +
       '<button type="button" class="actions-btn bs-select-all btn btn-default">' +
       this.options.selectAllText +
       '</button>' +
@@ -501,7 +504,7 @@
       var donebutton = this.multiple && this.options.doneButton ?
       '<div class="bs-donebutton">' +
       '<div class="btn-group btn-block">' +
-      '<button type="button" class="btn btn-sm btn-default">' +
+      '<button type="button" class="btn btn-lg btn-default">' +
       this.options.doneButtonText +
       '</button>' +
       '</div>' +
@@ -819,9 +822,10 @@
       if (this.$element.attr('class')) {
         this.$newElement.addClass(this.$element.attr('class').replace(/selectpicker|mobile-device|bs-select-hidden|validate\[.*\]/gi, ''));
       }
-
       var buttonClass = style ? style : this.options.style;
 
+console.log("style : " + buttonClass);
+      
       if (status == 'add') {
         this.$button.addClass(buttonClass);
       } else if (status == 'remove') {
@@ -830,6 +834,7 @@
         this.$button.removeClass(this.options.style);
         this.$button.addClass(buttonClass);
       }
+      
     },
 
     liHeight: function (refresh) {
