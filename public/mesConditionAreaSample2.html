@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="kr">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge, no-cache">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Mes Condition Area Sample</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="../css/bootstrap.css?ver=1" rel="stylesheet">
+  <link href="../css/bootstrap-select.css?ver=1" rel="stylesheet">
+  <style>
+    .fill {
+      min-height: 100%;
+      height: 100%;
+    }
+    
+    .condition {
+      min-height: 100%;
+      max-width: 1366px;
+    }
+    
+    #conditionArea .row,
+    #conditionArea .well .row {
+      min-height: 100%;
+      max-width: 1366px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    #conditionArea .well, #conditionArea .collapsing  {
+      margin-left: -15px;
+      margin-right: -15px;
+      border-radius: 0px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+
+  </style>
+</head>
+
+<body>
+<!-- ex1) form-group -->
+  <div class="container-fluid">
+    <div class="row">
+      <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#conditionArea"><span class="glyphicon glyphicon-search"></span></button>
+    </div>
+    <div id="conditionArea" class="collapse in">
+      <div class="well">
+        <div class="row">
+          <div class="col-md-2 col-sm-4">
+            <div class="form-group">
+              <label class="control-label" for="FacOpCd">공장</label>
+              <select id="FacOpCd" class="selectpicker form-control">
+                <option value="PEE2360" selected>1연주</option>
+                <option value="PEF2360">2연주</option>
+                <option value="PEG2160">3연주주편</option>
+                <option value="PEG2363">3연주정정</option>
+                <option value="PEN2360">4연주Slab</option>
+                <option value="PEK4160">4연주정정</option>
+                <option value="PEN2361">4연주GD</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-2 col-sm-4">
+            <div class="form-group">
+              <label class="control-label" for="whrSfTp">S/F구분</label>
+              <select id="whrSfTp" class="selectpicker form-control">
+                <option value="-" selected>전체</option>
+                <option value="A">전면</option>
+                <option value="B">부분</option>
+                <option value="E">Non Scarfing</option>
+                <option value="F">정정마감(CCR재)</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-1 col-sm-2 form-group">
+            <label class="control-label" for="whrDefTp">흠실적</label>
+            <select id="whrDefTp" class="selectpicker form-control">
+              <option value="-" selected>-</option>
+              <option value="Y">O</option>
+              <option value="N">X</option>
+            </select>
+          </div>
+          <div class="col-md-1 col-sm-2">
+            <div class="form-group">
+              <label class="control-label" for="whrSfTp">소재</label>
+              <select id="whrSfTp" class="selectpicker form-control">
+                <option value="0" selected>주편</option>
+                <option value="1">SLAB</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-1 col-sm-4">
+            <div class="form-group">
+              <label class="control-label" for="whrWksTp">근조</label>
+              <select id="whrWksTp" class="selectpicker form-control">
+                <option value="-">전체</option>
+                <option value="1">1근</option>
+                <option value="2">2근</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-2 col-sm-4">
+            <div class="form-group">
+              <label class="control-label" for="InMtlNo">재료번호</label>
+              <input type="text" class="form-control" name="InMtlNo" id="InMtlNo" placeholder="SA12345 012">
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-4">
+            <div class="form-group">
+              <label class="control-label" for="whrSfTp">조회일자</label>
+              <form class="form-inline">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="whrDateFr" size="6" maxlength="10" value="2017-04-24"> ~ 
+                  <input type="text" class="form-control" id="whrDateTo" size="6" maxlength="10" value="2017-04-24">
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <button id="find" type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-search"></span></button>
+          </div>
+<!--
+          <div class="col-xs-6">
+            <button id="save" type="submit" class="btn btn-primary form-control"><span class="glyphicon glyphicon-save">SAVE</span></button>
+          </div>
+-->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap core JavaScript
+    ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="../js/bootstrap.min.js"></script>
+  <script src="../js/bootstrap-select.js"></script>
+</body>
+
+</html>
