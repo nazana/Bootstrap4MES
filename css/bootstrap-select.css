@@ -367,5 +367,29 @@ padding: 5px 10px;
   height: auto;
 }
 
+/* 심경보 추가. form-group으로 사이즈 조정시 포함된 Label 사이즈를 설정. 2017-04-17*/
+.form-group-lg > label {
+/*  padding-top: 11px;*/
+  font-size: inherit;
+}
+
+.form-group-sm > label {
+/*  padding-top: 6px;*/
+  font-size: inherit;
+}
+
+.bootstrap-select.form-control {
+  margin-bottom: 0;
+  padding: 0;
+  border: none;
+  /* 심경보 추가. 버튼사이즈 변경시 주변부 사이즈가 변경 안됨. 2017.04.13 */
+  height: auto;
+}
+    
+/* 심경보 추가. form-group으로 사이즈 조정시 dropdown-menu 사이즈를 상속받음. 2017-04-17*/
+.form-group-lg .bootstrap-select.btn-group.form-control .dropdown-menu,
+.form-group-sm .bootstrap-select.btn-group.form-control .dropdown-menu {
+  font-size: inherit;
+}
 
 /*# sourceMappingURL=bootstrap-select.css.map */
