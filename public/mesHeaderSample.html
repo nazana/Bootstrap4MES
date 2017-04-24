@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="kr">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge, no-cache">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Mes Condition Area Sample</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="../css/bootstrap.css?ver=1" rel="stylesheet">
+  <link href="../css/bootstrap-select.css?ver=1" rel="stylesheet">
+  <style>
+    .fill {
+      min-height: 100%;
+      height: 100%;
+    }
+    
+    .condition {
+      min-height: 100%;
+      max-width: 1366px;
+    }
+    
+    #conditionArea .row,
+    #conditionArea .well .row,
+    #conditionArea2 .row,
+    #conditionArea2 .well .row {
+      min-height: 100%;
+      max-width: 1366px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    #conditionArea2 .well,
+    #conditionArea2 .collapsing,
+    #conditionArea .well,
+    #conditionArea .collapsing {
+      margin-left: -15px;
+      margin-right: -15px;
+      border-radius: 0px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+    
+    body {
+      padding-top: 51px;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- Fixed navbar -->
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+<!--        <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-menu-hamburger"></span></a>-->
+<!--        <a class="navbar-brand" href="#">Bootstrap theme</a>-->
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="#"><span class="glyphicon glyphicon-menu-hamburger"></span></a></li>
+          <li class="active"><a href="#">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li role="separator" class="divider"></li>
+              <li class="dropdown-header">Nav header</li>
+              <li><a href="#">Separated link</a></li>
+              <li><a href="#">One more separated link</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <!--/.nav-collapse -->
+    </div>
+  </nav>
+  <!-- Fixed navbar >
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Bootstrap theme</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li role="separator" class="divider"></li>
+              <li class="dropdown-header">Nav header</li>
+              <li><a href="#">Separated link</a></li>
+              <li><a href="#">One more separated link</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <!--/.nav-collapse >
+    </div>
+  </nav>
+-->
+  <!-- ex1) form-group -->
+  <div class="container-fluid">
+    <div id="conditionArea" class="collapse in">
+      <div class="well">
+        <div class="row">
+          <div class="col-md-4 col-sm-4">
+            <!--            <div class="form-group form-group-sm">-->
+            <div class="form-group">
+              <label class="control-label" for="FacOpCd">공장</label>
+              <select id="FacOpCd" class="selectpicker form-control"> <!-- data-style="btn-default btn-sm"> -->
+                  <option>1연주</option>
+                  <option>2연주</option>
+                  <option>3연주</option>
+                </select>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-4">
+            <div class="form-group">
+              <!--            <div class="form-group form-group-lg">-->
+              <label class="control-label" for="McNo">Machine No</label>
+              <select id="McNo" class="selectpicker form-control">
+                  <option>1M/C</option>
+                  <option>2M/C</option>
+                  <option>3M/C</option>
+                  <option>4M/C</option>
+                </select>
+            </div>
+          </div>
+          <!--          <div class="col-md-4 col-sm-4 form-group form-group-lg">-->
+          <div class="col-md-4 col-sm-4 form-group">
+            <!--          <div class="col-md-4 col-sm-4 form-group form-group-sm">-->
+            <label class="control-label" for="MtlNo">재료번호</label>
+            <select class="selectpicker form-control" data-live-search="true" data-size="10">
+                  <option>SA00001</option>
+                  <option>SA00002</option>
+                  <option>SA00003</option>
+                  <option>SA00004</option>
+                  <option>SA00005</option>
+                  <option>SA00006</option>
+                  <option>SA00007</option>
+                  <option>SA00008</option>
+                  <option>SA00009</option>
+                  <option>SA00010</option>
+                  <option>SA00011</option>
+                  <option>SA00012</option>
+                  <option>SA00013</option>
+                  <option>SA00014</option>
+                  <option>SA00015</option>
+                  <option>SA00016</option>
+                  <option>SA00017</option>
+                  <option>SA00018</option>
+                  <option>SA00019</option>
+                  <option>SA00020</option>
+                  <option>SA00021</option>
+                  <option>SA00022</option>
+                  <option>SA00023</option>
+                  <option>SA00024</option>
+                  <option>SA00025</option>
+                  <option>SA00026</option>
+                  <option>SA00027</option>
+                  <option>SA00028</option>
+                  <option>SA00029</option>
+                  <option>SA00030</option>
+                </select>
+          </div>
+          <!--        </div>-->
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <button id="find" type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-search"></span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#conditionArea"><span class="glyphicon glyphicon-search"></span></button>
+    </div>
+  </div>
+  <!-- Bootstrap core JavaScript
+    ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="../js/bootstrap.min.js"></script>
+  <script src="../js/bootstrap-select.js"></script>
+</body>
+
+</html>
