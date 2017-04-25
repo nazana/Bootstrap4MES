@@ -4164,8 +4164,12 @@ margin-top: -1px;
   border-top-right-radius: 0;
 }
 .navbar {
-position: relative;
+  position: relative;
+  /*
   min-height: 50px;
+  */
+  /* navbar 높이 조절위해 변경, 심경보 */
+  min-height: 40px;
   margin-bottom: 20px;
   border: 1px solid transparent;
 }
@@ -4272,9 +4276,14 @@ bottom: 0;
   border-width: 1px 0 0;
 }
 .navbar-brand {
-float: left;
+  float: left;
+  /*
   height: 50px;
   padding: 15px 15px;
+  */
+  /* navbar 높이 조절위해 변경, 심경보 */
+  height: 40px;
+  padding: 10px 10px;
   font-size: 18px;
   line-height: 20px;
 }
@@ -4324,7 +4333,7 @@ display: none;
 margin: 7.5px -15px;
 }
 .navbar-nav > li > a {
-padding-top: 10px;
+  padding-top: 10px;
   padding-bottom: 10px;
   line-height: 20px;
 }
@@ -4352,16 +4361,21 @@ background-image: none;
   }
 }
 @media (min-width: 768px) {
-.navbar-nav {
-float: left;
+  .navbar-nav {
+    float: left;
     margin: 0;
   }
   .navbar-nav > li {
-float: left;
+    float: left;
   }
   .navbar-nav > li > a {
-padding-top: 15px;
+    /*
+    padding-top: 15px;
     padding-bottom: 15px;
+    */
+    /* navbar 높이 조절위해 변경, 심경보 */
+    padding-top: 10px;
+    padding-bottom: 10px;
   }
 }
 .navbar-form {

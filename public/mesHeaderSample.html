@@ -65,8 +65,8 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-<!--        <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-menu-hamburger"></span></a>-->
-<!--        <a class="navbar-brand" href="#">Bootstrap theme</a>-->
+        <!--        <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-menu-hamburger"></span></a>-->
+        <!--        <a class="navbar-brand" href="#">Bootstrap theme</a>-->
       </div>
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
@@ -132,10 +132,9 @@
       <div class="well">
         <div class="row">
           <div class="col-md-4 col-sm-4">
-            <!--            <div class="form-group form-group-sm">-->
             <div class="form-group">
               <label class="control-label" for="FacOpCd">공장</label>
-              <select id="FacOpCd" class="selectpicker form-control"> <!-- data-style="btn-default btn-sm"> -->
+              <select id="FacOpCd" class="selectpicker form-control">
                   <option>1연주</option>
                   <option>2연주</option>
                   <option>3연주</option>
@@ -144,7 +143,6 @@
           </div>
           <div class="col-md-4 col-sm-4">
             <div class="form-group">
-              <!--            <div class="form-group form-group-lg">-->
               <label class="control-label" for="McNo">Machine No</label>
               <select id="McNo" class="selectpicker form-control">
                   <option>1M/C</option>
@@ -154,9 +152,7 @@
                 </select>
             </div>
           </div>
-          <!--          <div class="col-md-4 col-sm-4 form-group form-group-lg">-->
           <div class="col-md-4 col-sm-4 form-group">
-            <!--          <div class="col-md-4 col-sm-4 form-group form-group-sm">-->
             <label class="control-label" for="MtlNo">재료번호</label>
             <select class="selectpicker form-control" data-live-search="true" data-size="10">
                   <option>SA00001</option>
@@ -191,7 +187,6 @@
                   <option>SA00030</option>
                 </select>
           </div>
-          <!--        </div>-->
         </div>
         <div class="row">
           <div class="col-xs-12">
@@ -204,6 +199,116 @@
       <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#conditionArea"><span class="glyphicon glyphicon-search"></span></button>
     </div>
   </div>
+
+<!-- ex1) form-group -->
+<!--
+  <div class="container-fluid">
+    <div id="conditionArea" class="collapse in">
+      <div class="well">
+        <div class="row">
+          <div class="col-md-2 col-sm-4">
+            <div class="form-group">
+              <label class="control-label" for="FacOpCd">공장</label>
+              <select id="FacOpCd" class="selectpicker form-control">
+                <option value="PEE2360" selected>1연주</option>
+                <option value="PEF2360">2연주</option>
+                <option value="PEG2160">3연주주편</option>
+                <option value="PEG2363">3연주정정</option>
+                <option value="PEN2360">4연주Slab</option>
+                <option value="PEK4160">4연주정정</option>
+                <option value="PEN2361">4연주GD</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-2 col-sm-4">
+            <div class="form-group">
+              <label class="control-label" for="whrSfTp">S/F구분</label>
+              <select id="whrSfTp" class="selectpicker form-control">
+                <option value="-" selected>전체</option>
+                <option value="A">전면</option>
+                <option value="B">부분</option>
+                <option value="E">Non Scarfing</option>
+                <option value="F">정정마감(CCR재)</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-1 col-sm-2">
+            <div class="form-group">
+              <label class="control-label" for="whrDefTp">흠실적</label>
+              <select id="whrDefTp" class="selectpicker form-control">
+                <option value="-" selected>-</option>
+                <option value="Y">O</option>
+                <option value="N">X</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-1 col-sm-2">
+            <div class="form-group">
+              <label class="control-label" for="whrSfTp">소재</label>
+              <select id="whrSfTp" class="selectpicker form-control">
+                <option value="0" selected>주편</option>
+                <option value="1">SLAB</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-1 col-sm-4">
+            <div class="form-group">
+              <label class="control-label" for="whrWksTp">근조</label>
+              <select id="whrWksTp" class="selectpicker form-control">
+                <opti,on value="-">전체</option>
+                <option value="1">1근</option>
+                <option value="2">2근</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-2 col-sm-4">
+            <div class="form-group">
+              <label class="control-label" for="InMtlNo">재료번호</label>
+              <input type="text" class="form-control" name="InMtlNo" id="InMtlNo" placeholder="SA12345 012">
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-4">
+            <div class="form-group">
+              <label class="control-label" for="whrSfTp">조회일자</label>
+              <form class="form-inline">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="whrDateFr" size="6" maxlength="10" value="2017-04-24"> ~ 
+                  <input type="text" class="form-control" id="whrDateTo" size="6" maxlength="10" value="2017-04-24">
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <button id="find" type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-search"></span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#conditionArea"><span class="glyphicon glyphicon-search"></span></button>
+    </div>
+  </div>
+-->
+<div>
+  <nav class="navbar navbar-inverse navbar-fixed-bottom">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">WebSiteName</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Home</a></li>
+        <li><a href="#">Page 1</a></li>
+        <li><a href="#">Page 2</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      </ul>
+    </div>
+  </nav>
+</div>
   <!-- Bootstrap core JavaScript
     ================================================== -->
   <!-- Placed at the end of the document so the pages load faster -->
