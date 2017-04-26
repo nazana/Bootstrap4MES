@@ -6529,6 +6529,8 @@ clear: both;
 display: block;
   margin-right: auto;
   margin-left: auto;
+  /* Label의 가운데 정렬을 위해 추가. 다른 Component 영향도 검토 필요. 4.26.17, 심경보 */
+  text-align: center;
 }
 .pull-right {
 float: right !important;
