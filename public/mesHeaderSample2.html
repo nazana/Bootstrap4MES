@@ -28,7 +28,8 @@
     #conditionArea .row,
     #conditionArea .well .row,
     #conditionArea2 .row,
-    #conditionArea2 .well .row {
+    #conditionArea2 .well .row,
+    #conditionArrow .well {
       min-height: 100%;
       max-width: 1366px;
       margin-left: auto;
@@ -36,23 +37,38 @@
     }
     
     #conditionArea2 .well,
-    #conditionArea2 .collapsing,
     #conditionArea .well,
-    #conditionArea .collapsing {
-      margin-left: -15px;
-      margin-right: -15px;
+    #conditionArrow.well {
       border-radius: 0px;
       padding-top: 10px;
       padding-bottom: 10px;
+      margin-bottom: 0px;
     }
     
+    #conditionArrow.well {
+      padding-top: 0px;
+      padding-bottom: 0px;
+      display:block;
+      margin-left: auto;
+      margin-right: auto;
+    }
     body {
       padding-top: 40px;
     }
     
     .custom {
-        width: 120px !important;
-        border-radius: 15px;
+      width: 120px !important;
+      border-radius: 15px;
+    }
+    
+    .custom2 {
+      margin-left: -15px;
+      margin-right: -15px;
+    }
+
+    .custom3 {
+      padding-right: 0px;
+      padding-left: 0px;
     }
   </style>
 </head>
@@ -79,11 +95,11 @@
     </div>
   </nav>
   <!-- ex1) form-group -->
-  <div class="container-fluid " style="margin-left:-15px; margin-right:">
+  <div class="container-fluid custom2">
     <div id="conditionArea" class="collapse in">
       <div class="well">
         <div class="row">
-          <div class="col-md-2 col-sm-4">
+          <div class="col-md-2 col-sm-4 col-xs-6">
             <div class="form-group">
               <label class="control-label center-block" for="FacOpCd">공장</label>
               <select id="FacOpCd" class="selectpicker form-control" multiple>
@@ -97,7 +113,7 @@
               </select>
             </div>
           </div>
-          <div class="col-md-2 col-sm-4">
+          <div class="col-md-2 col-sm-4 col-xs-6">
             <div class="form-group">
               <label class="control-label center-block" for="whrSfTp">S/F구분</label>
               <select id="whrSfTp" class="selectpicker form-control">
@@ -109,7 +125,7 @@
               </select>
             </div>
           </div>
-          <div class="col-md-1 col-sm-2">
+          <div class="col-md-1 col-sm-2 col-xs-6">
             <div class="form-group">
               <label class="control-label center-block" for="whrDefTp">흠실적</label>
               <select id="whrDefTp" class="selectpicker form-control">
@@ -119,7 +135,7 @@
               </select>
             </div>
           </div>
-          <div class="col-md-1 col-sm-2">
+          <div class="col-md-1 col-sm-2 col-xs-6">
             <div class="form-group">
               <label class="control-label center-block" for="whrSfTp">소재</label>
               <select id="whrSfTp" class="selectpicker form-control">
@@ -128,7 +144,7 @@
               </select>
             </div>
           </div>
-          <div class="col-md-1 col-sm-4">
+          <div class="col-md-1 col-sm-4 col-xs-6">
             <div class="form-group">
               <label class="control-label center-block" for="whrWksTp">근조</label>
               <select id="whrWksTp" class="selectpicker form-control">
@@ -138,22 +154,33 @@
               </select>
             </div>
           </div>
-          <div class="col-md-2 col-sm-4">
+          <div class="col-md-2 col-sm-4 col-xs-6">
             <div class="form-group">
               <label class="control-label center-block" for="InMtlNo">재료번호</label>
               <input type="text" class="form-control" name="InMtlNo" id="InMtlNo" placeholder="SA12345 012">
             </div>
           </div>
-          <div class="col-md-3 col-sm-4 center-block">
+          <div class="col-md-3 col-sm-4 col-xs-12 center-block">
             <div class="form-group">
               <label class="control-label center-block" for="whrSfTp">조회일자</label>
               <form class="form-inline">
-                <div class="form-group">
-                  <input type="text" class="form-control" id="whrDateFr" size="6" maxlength="10" value="2017-04-24"> ~
-                  <input type="text" class="form-control" id="whrDateTo" size="6" maxlength="10" value="2017-04-24">
-                </div>
+                <input type="text" class="form-control" id="whrDateFr" maxlength="10" value="2017-04-24" style="width:45%">
+                <span>~</span>
+                <input type="text" class="form-control" id="whrDateTo" maxlength="10" value="2017-04-24" style="width:45%">
               </form>
             </div>
+<!-- form-inline으로 잘 되지 않아 다시 Grid에 담았음 -->
+<!--
+            <div class="form-group">
+              <label class="control-label center-block" for="whrSfTp">조회일자</label>
+              <div class="col-xs-5 custom3">
+                  <input type="text" class="form-control" id="whrDateFr" maxlength="10" value="2017-04-24">
+              </div>
+              <div class="col-xs-2 custom3">~</div>
+              <div class="col-xs-5 custom3">
+                  <input type="text" class="form-control" id="whrDateTo" maxlength="10" value="2017-04-24">
+              </div>
+-->
           </div>
         </div>
         <div class="row">
@@ -163,8 +190,8 @@
         </div>
       </div>
     </div>
-    <div class="row">
-      <button type="button" class="btn btn-primary center-block" data-toggle="collapse" data-target="#conditionArea"><span class="glyphicon glyphicon-search"></span></button>
+    <div id="conditionArrow" class="well" data-toggle="collapse" data-target="#conditionArea">
+      <span class="glyphicon glyphicon-chevron-down center-block"></span>
     </div>
   </div>
   <div>

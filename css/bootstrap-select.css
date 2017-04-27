@@ -17,7 +17,8 @@ select.selectpicker {
 
 .bootstrap-select>.dropdown-toggle {
   width: 100%;
-  padding-right: 25px;
+  /*  padding-right: 25px;*/
+  /* caret 부분이 글씨를 덮지 않게 수정. 04/27/17, 심경보 */
   z-index: 1;
 }
 
@@ -168,7 +169,9 @@ padding: 5px 10px;
 .bootstrap-select.btn-group .dropdown-toggle .caret {
   position: absolute;
   top: 50%;
-  right: 12px;
+  /*  right: 12px;*/
+  /* 너무 왼쪽에 붙어서 조정. 04/27/17, 심경보 */
+  right: 5px;
   margin-top: -2px;
   vertical-align: middle;
 }
