@@ -59,7 +59,7 @@
     }
     
     .custom {
-      width: 120px !important;
+      width: 240px !important;
       border-radius: 15px;
     }
     
@@ -73,52 +73,15 @@
       padding-left: 0px;
     }
     
-/*
-    .glyphicon-chevron-up:before {
-        content: "\e113";
+    /* condition area의 collapse를 위한 버튼의 180도 회전 css. 응용가능 */
+    a[data-toggle="collapse"][aria-expanded="true"] .glyphicon-chevron-down,
+    .btn[data-toggle="collapse"][aria-expanded="true"] .glyphicon-chevron-down
+    ,a.dropdown-toggle[aria-expanded="true"] .glyphicon-chevron-down {
+      filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
+      -webkit-transform: rotate(180deg);
+      -ms-transform: rotate(180deg);
+      transform: rotate(180deg);
     }
-    .glyphicon-chevron-up:after {
-      content: "\e114";
-      display:none
-    }
-    .glyphicon-chevron-up:hover {
-      content: "\e114";
-      display:none
-    }
-*/
-/*
-    .conditionArrow .glyphicon-chevron-up:before,
-      color: #707070;
-      padding-left: 8px;
-    }
-*/
-    
-/*
-    #conditionArea.collapse in .conditionArrow .glyphicon-chevron-up:before {
-      content: "\e113";
-      display: block;
-    }
-*/
-    #conditionArrow .glyphicon-chevron-up:before {
-      content: "\e113";
-/*      display: none;*/
-    }
-    #conditionArrow.collapsed .glyphicon-chevron-up:after {
-      content: "\e114";
-/*      display: none;*/
-    }
-/*
-    #conditionArea #conditionArrow .glyphicon-chevron-up:before {
-      content: "\e113";
-      display: block;
-    }
-*/
-/*
-    .conditionArea .conditionArrow .glyphicon-chevron-down:before {
-      content: "\e113";
-      display:block;
-    }
-*/
   </style>
 </head>
 
@@ -212,12 +175,11 @@
           <div class="col-md-3 col-sm-4 col-xs-12 center-block">
             <div class="form-group">
               <label class="control-label center-block" for="whrSfTp">조회일자</label>
-              
-  <div class="input-daterange input-group" id="datepicker">
-    <input type="text" class="form-control" name="whrDateFr" />
-    <span class="input-group-addon">~</span>
-    <input type="text" class="form-control" name="whrDateTo" />
-  </div>
+              <div class="input-daterange input-group" id="datepicker">
+                <input type="text" class="form-control" name="whrDateFr" />
+                <span class="input-group-addon">~</span>
+                <input type="text" class="form-control" name="whrDateTo" />
+              </div>
   
 <!--
               <form class="form-inline">
@@ -236,8 +198,10 @@
         </div>
       </div>
     </div>
-    <div id="conditionArrow" class="well" data-toggle="collapse" data-target="#conditionArea">
-      <span class="glyphicon glyphicon-chevron-up center-block"></span>
+    <div id="conditionArrow" class="well">
+      <a data-toggle="collapse" data-target="#conditionArea" aria-expanded="true">
+        <span class="glyphicon glyphicon-chevron-down center-block"></span>
+      </a>
     </div>
   </div>
   
