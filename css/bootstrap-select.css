@@ -17,7 +17,7 @@ select.selectpicker {
 
 .bootstrap-select>.dropdown-toggle {
   width: 100%;
-  /*  padding-right: 25px;*/
+  padding-right: 25px;
   /* caret 부분이 글씨를 덮지 않게 수정. 04/27/17, 심경보 */
   z-index: 1;
 }
