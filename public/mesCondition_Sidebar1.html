@@ -15,6 +15,7 @@
   <link href="../css/bootstrap.css?ver=1" rel="stylesheet">
   <link href="../css/bootstrap-select.css?ver=1" rel="stylesheet">
   <link href="../css/bootstrap-datepicker.css?ver=1" rel="stylesheet">
+  <link href="../css/sidebar.css" rel="stylesheet">
   <style>
     .fill {
       min-height: 100%;
@@ -59,7 +60,7 @@
     }
     
     .custom {
-      width: 240px !important;
+      width: 120px !important;
       border-radius: 15px;
     }
     
@@ -130,7 +131,9 @@
   <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
       <div class="navbar-header">
-        <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
+        <a class="navbar-brand" href="#" data-toggle="collapse" data-target="#conditionArea" aria-expanded="true">
+        <span class="glyphicon glyphicon-menu-hamburger"></span>
+        </a>
       </div>
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-left">
@@ -145,14 +148,18 @@
       </div>
     </div>
   </nav>
-  <!-- ex1) form-group -->
-  <div class="container-fluid custom2">
-    <div id="conditionArea" class="collapse in">
-      <div class="well">
-        <div class="row">
-          <div class="col-md-2 col-sm-4 col-xs-6">
-            <div class="form-group">
-              <label class="control-label center-block" for="FacOpCd">공장</label>
+  <div class="sidebar collapse" id="conditionArea" data-background-color="brown" data-active-color="danger">
+    <div class="logo">
+      <a href="http://www.creative-tim.com" class="simple-text logo-mini">
+        CT
+      </a>
+    </div>
+
+      <div class="sidebar-wrapper">
+        <form class="form-horizontal">
+          <div class="form-group">
+            <label for="FacOpCd" class="col-sm-4 control-label">공장</label>
+            <div class="col-sm-8">
               <select id="FacOpCd" class="selectpicker form-control" multiple>
                 <option value="PEE2360" selected>1연주</option>
                 <option value="PEF2360">2연주</option>
@@ -164,9 +171,9 @@
               </select>
             </div>
           </div>
-          <div class="col-md-2 col-sm-4 col-xs-6">
-            <div class="form-group">
-              <label class="control-label center-block" for="whrSfTp">S/F구분</label>
+          <div class="form-group">
+            <label for="whrSfTp" class="col-sm-4 control-label">S/F구분</label>
+            <div class="col-sm-8">
               <select id="whrSfTp" class="selectpicker form-control">
                 <option value="-" selected>전체</option>
                 <option value="A">전면</option>
@@ -176,9 +183,9 @@
               </select>
             </div>
           </div>
-          <div class="col-md-1 col-sm-2 col-xs-6">
-            <div class="form-group">
-              <label class="control-label center-block" for="whrDefTp">흠실적</label>
+          <div class="form-group">
+            <label for="whrDefTp" class="col-sm-4 control-label">흠실적</label>
+            <div class="col-sm-8">
               <select id="whrDefTp" class="selectpicker form-control">
                 <option value="-" selected>-</option>
                 <option value="Y">O</option>
@@ -186,65 +193,50 @@
               </select>
             </div>
           </div>
-          <div class="col-md-1 col-sm-2 col-xs-6">
-            <div class="form-group">
-              <label class="control-label center-block" for="whrSfTp">소재</label>
+          <div class="form-group">
+            <label for="whrSfTp" class="col-sm-4 control-label">소재</label>
+            <div class="col-sm-8">
               <select id="whrSfTp" class="selectpicker form-control">
                 <option value="0" selected>주편</option>
                 <option value="1">SLAB</option>
               </select>
             </div>
           </div>
-          <div class="col-md-1 col-sm-4 col-xs-6">
-            <div class="form-group">
-              <label class="control-label center-block" for="whrWksTp">근조</label>
+          <div class="form-group">
+            <label for="whrWksTp" class="col-sm-4 control-label">근조</label>
+            <div class="col-sm-8">
               <select id="whrWksTp" class="selectpicker form-control">
-                <opti,on value="-">전체</option>
+                <option value="-">전체</option>
                 <option value="1">1근</option>
                 <option value="2">2근</option>
               </select>
             </div>
           </div>
-          <div class="col-md-2 col-sm-4 col-xs-6">
-            <div class="form-group">
-              <label class="control-label center-block" for="InMtlNo">재료번호</label>
+          <div class="form-group">
+            <label for="InMtlNo" class="col-sm-4 control-label">재료번호</label>
+            <div class="col-sm-8">
               <input type="text" class="form-control" name="InMtlNo" id="InMtlNo" placeholder="SA12345 012">
             </div>
           </div>
-          <div class="col-md-3 col-sm-4 col-xs-12 center-block">
-            <div class="form-group">
-              <label class="control-label center-block" for="whrSfTp">조회일자</label>
+          <div class="form-group">
+            <label for="InMtlNo" class="col-sm-4 control-label">조회일자</label>
+            <div class="col-sm-8">
               <div class="input-daterange input-group" id="datepicker">
                 <input type="text" class="form-control" name="whrDateFr" />
                 <span class="input-group-addon">~</span>
                 <input type="text" class="form-control" name="whrDateTo" />
               </div>
-  
-<!--
-              <form class="form-inline">
-                <input type="text" class="form-control cal" id="whrDateFr" maxlength="10" value="2017-04-24" style="width:45%">
-                <span>~</span>
-                <input type="text" class="form-control cal" id="whrDateTo" maxlength="10" value="2017-04-24" style="width:45%">
-              </form>
--->
             </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-12">
+          <div class="col-sm-12">
             <button id="find" type="submit" class="btn btn-success btn-sm center-block custom"><span class="glyphicon glyphicon-search"></span></button>
           </div>
-        </div>
+        </form>
+
       </div>
     </div>
-    <!-- Arrow Button that Collapse to Condition Area   -->
-    <div id="conditionArrow" class="well">
-      <a data-toggle="collapse" data-target="#conditionArea" aria-expanded="true">
-        <span class="glyphicon glyphicon-chevron-down center-block"></span>
-      </a>
-    </div>
+    //
   </div>
-  
   <div>
     <!-- Fixed bottom navbar -->
     <nav class="navbar navbar-inverse navbar-fixed-bottom">
