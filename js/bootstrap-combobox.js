@@ -356,7 +356,7 @@
               this.$menu.scrollTop(scrollTop + top);
           }
       }
-  }
+    }
 
   , keydown: function (e) {
       this.suppressKeyPressRepeat = ~$.inArray(e.keyCode, [40,38,9,13,27]);
@@ -403,7 +403,7 @@
 
       e.stopPropagation();
       e.preventDefault();
-  }
+    }
 
   , focus: function (e) {
       this.focused = true;
