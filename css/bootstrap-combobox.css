@@ -42,3 +42,11 @@
 .control-group.success .combobox-container .caret {
   border-top-color: #468847;
 }
+
+/* add 100% */
+.combobox-container .input-group .dropdown-menu {
+    min-width: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
