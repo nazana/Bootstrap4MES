@@ -14,14 +14,28 @@
     </div>
   </div>
   
-  <div class="conbobox-container">
+  <div class="combobox-container">
+    <input type="hidden" />
+    <div class="input-group">
+      <div class="input-group-btn">
+        <input type="text" autocomplete="off" />
+        <span class="input-group-addon dropdown-toggle" data-dropdown="dropdown">
+          <span class="caret" />
+          <span class="glyphicon glyphicon-remove" />
+      </span>
+    </div>
+  </div>
+  
+  <div class="combobox-container">
     <input type="hidden" />
     <div class="input-group">
       <input type="text" autocomplete="off" />
-      <span class="input-group-addon dropdown-toggle" data-dropdown="dropdown">
-        <span class="catet" />
-        <span class="glyphicon glyphicon-remove" />
-      </span>
+      <div class="input-group-btn">
+        <button type="button" class="btn btn-default dropdown-toggle" data-dropdown="dropdown">
+          <span class="caret" />
+          <span class="glyphicon glyphicon-remove" />
+        </button>
+      </div>
     </div>
   </div>
 </body>
