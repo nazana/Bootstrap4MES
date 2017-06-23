@@ -201,9 +201,10 @@
           <div class="form-group">
             <label class="control-label col-sm-2">Into this</label>
             <div class="col-sm-10">
-              <select class="combobox form-control" name="horizontal" required="required" title="test111" id="title">
+              <select class="combobox form-control" name="horizontal" required="required" title="test111" id="title" data-link="test">
                 <option value="">Select a State</option>
-                <option value="AL" selected="selected">Alabama</option>
+                <option value="" selected="selected">Select a State</option>
+                <option value="AL">Alabama</option>
                 <option value="AK">Alaska</option>
                 <option value="AZ">Arizona</option>
                 <option value="AR">Arkansas</option>
@@ -385,6 +386,7 @@
       <hr />
       <h2 id="live-search_1">Live search</h2>
       <p>You can add a search input by passing <code>data-live-search="true"</code> attribute:</p>
+<!--
       <div class="bs-docs-example no-code">
         <select class="selectpicker" data-live-search="true">
           <option value="AL" selected="selected">Alabama</option>
@@ -440,17 +442,113 @@
           <option value="WY">Wyoming</option>
         </select>
       </div>
-
+-->
       <h2 id="key-words">Key words</h2>
       <p>Add key words to options to improve their searchability using <code>data-tokens</code>.</p>
       <div class="bs-docs-example">
-        <select class="selectpicker" data-live-search="true">
+        <select class="selectpicker" multiple data-live-search="true">
           <option data-tokens="ketchup mustard">Hot Dog, Fries and a Soda</option>
           <option data-tokens="mustard">Burger, Shake and a Smile</option>
           <option data-tokens="frosting">Sugar, Spice and all things nice</option>
         </select>
       </div>
     </div>
+<!--
+    <div class="bs-docs-example">
+      <div class="btn-group bootstrap-select show-tick dropup">
+        <button type="button" class="btn dropdown-toggle bs-placeholder btn-default" data-toggle="dropdown" role="button" title="Nothing selected" aria-expanded="false">
+          <span class="filter-option pull-left">Nothing selected</span>
+          &nbsp;
+          <span class="bs-caret">
+            <span class="caret"></span>
+          </span>
+        </button>
+        <div class="dropdown-menu open" role="combobox" style="max-height: 397px; overflow: hidden; min-height: 42px;">
+          <div class="bs-searchbox">
+            <input type="text" class="form-control" autocomplete="off" role="textbox" aria-label="Search" title="Nothing selected">
+          </div>
+          <ul class="dropdown-menu inner" role="listbox" aria-expanded="false" style="max-height: 343px; overflow-y: auto; min-height: 0px;">
+            <li data-original-index="0">
+              <a tabindex="0" class="" data-tokens="ketchup mustard" role="option" aria-disabled="false" aria-selected="false">
+                <span class="text">Hot Dog, Fries and a Soda</span><span class="glyphicon glyphicon-ok check-mark"></span>
+              </a>
+            </li>
+            <li data-original-index="1">
+              <a tabindex="0" class="" data-tokens="mustard" role="option" aria-disabled="false" aria-selected="false">
+                <span class="text">Burger, Shake and a Smile</span>
+                <span class="glyphicon glyphicon-ok check-mark"></span>
+              </a>
+            </li>
+            <li data-original-index="2">
+              <a tabindex="0" class="" data-tokens="frosting" role="option" aria-disabled="false" aria-selected="false">
+                <span class="text">Sugar, Spice and all things nice</span>
+                <span class="glyphicon glyphicon-ok check-mark"></span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <select class="selectpicker" multiple="" data-live-search="true" tabindex="-98">
+          <option data-tokens="ketchup mustard">Hot Dog, Fries and a Soda</option>
+          <option data-tokens="mustard">Burger, Shake and a Smile</option>
+          <option data-tokens="frosting">Sugar, Spice and all things nice</option>
+        </select>
+      </div>
+    </div>
+-->
+<!--
+    <div class="bs-docs-example">
+      <div class="btn-group bootstrap-select show-tick ">
+      <div class="bootstrap-select show-tick">
+        <input type="hidden" value="Nothing selected">
+        <button type="button" class="btn dropdown-toggle bs-placeholder btn-default" data-toggle="dropdown" role="button" title="Nothing selected" aria-expanded="false">
+          <span class="filter-option pull-left">Nothing selected</span>
+          &nbsp;
+          <span class="bs-caret">
+            <span class="caret"></span>
+          </span>
+        </button>
+        <div class="input-group">
+          <input type="text" class="form-control" autocomplete="off" title="Nothing selected">
+          <div class="input-group-btn">
+            <button type="button" class="btn dropdown-toggle bs-placeholder btn-default" data-toggle="dropdown" role="button" title="Nothing selected" aria-expanded="false">
+              <span class="filter-option pull-left">Nothing selected</span>
+              &nbsp;
+              <span class="bs-caret">
+                <span class="caret"></span>
+              </span>
+            </button>
+          </div>
+        </div>
+        <div class="dropdown-menu open" role="combobox" style="max-height: 52px; overflow: hidden; min-height: 42px;">
+          <ul class="dropdown-menu inner" role="listbox" aria-expanded="false" style="overflow-y: auto; min-height: 0px;">
+            <li data-original-index="0">
+              <a tabindex="0" class="" data-tokens="ketchup mustard" role="option" aria-disabled="false" aria-selected="false">
+                <span class="text">Hot Dog, Fries and a Soda</span>
+                <span class="glyphicon glyphicon-ok check-mark"></span>
+              </a>
+            </li>
+            <li data-original-index="1">
+              <a tabindex="0" class="" data-tokens="mustard" role="option" aria-disabled="false" aria-selected="false">
+                <span class="text">Burger, Shake and a Smile</span>
+                <span class="glyphicon glyphicon-ok check-mark"></span>
+              </a>
+            </li>
+            <li data-original-index="2">
+              <a tabindex="0" class="" data-tokens="frosting" role="option" aria-disabled="false" aria-selected="false">
+                <span class="text">Sugar, Spice and all things nice</span>
+                <span class="glyphicon glyphicon-ok check-mark"></span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <select class="selectpicker" multiple="" data-live-search="true" tabindex="-98">
+          <option data-tokens="ketchup mustard">Hot Dog, Fries and a Soda</option>
+          <option data-tokens="mustard">Burger, Shake and a Smile</option>
+          <option data-tokens="frosting">Sugar, Spice and all things nice</option>
+        </select>
+      </div>-->
+    </div>
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/bootstrap-select.js"></script>
@@ -459,7 +557,7 @@
     <script type="text/javascript">
       //<![CDATA[
         $(document).ready(function(){
-          $('.combobox').combobox();
+//          $('.combobox').combobox();
         });
       //]]>
     </script>

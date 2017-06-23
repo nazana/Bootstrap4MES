@@ -25,13 +25,13 @@
 
   var Combobox = function ( element, options ) {
     this.options = $.extend({}, $.fn.combobox.defaults, options);
-    this.template = this.options.template || this.template // combobox 기본 모양 (그런데 왜 input-large가 붙지?)
-    this.$source = $(element); // select tag (combobox class를 사용한 tag 전체 dom)
-    this.$container = this.setup(); // template을 적용한 combobox-container
+    this.template = this.options.template || this.template
+    this.$source = $(element);
+    this.$container = this.setup();
     this.$element = this.$container.find('input[type=text]');
     this.$target = this.$container.find('input[type=hidden]');
-    this.$button = this.$container.find('.dropdown-toggle'); // add-on or button tag to toggle dropdown-menu
-    this.$menu = $(this.options.menu).appendTo('body'); // this.options.menu은 Ul부분이고 body 맨 밑에 자식레벨에 붙인다.
+    this.$button = this.$container.find('.dropdown-toggle');
+    this.$menu = $(this.options.menu).appendTo('body');
     this.matcher = this.options.matcher || this.matcher;
     this.sorter = this.options.sorter || this.sorter;
     this.highlighter = this.options.highlighter || this.highlighter;
@@ -40,6 +40,7 @@
     this.refresh();
     this.transferAttributes();
     this.listen();
+//    console.log(this);
   };
 
   Combobox.prototype = {
@@ -50,70 +51,59 @@
       var combobox = $(this.template());
       this.$source.before(combobox);
       this.$source.hide();
-    
       return combobox;
     }
-    
-    /* disable = true */
+
   , disable: function() {
       this.$element.prop('disabled', true);
       this.$button.attr('disabled', true);
       this.disabled = true;
       this.$container.addClass('combobox-disabled');
     }
-    
-    /* disable=false */
+
   , enable: function() {
       this.$element.prop('disabled', false);
       this.$button.attr('disabled', false);
       this.disabled = false;
       this.$container.removeClass('combobox-disabled');
     }
-    
-    /* refresh -> parse option을 LI로 parsing */
+
   , parse: function () {
       var that = this
         , map = {}
         , source = []
         , selected = false
-        , selectedValue = ''
-//        , selectedIndex = 0;
+        , selectedValue = '';
       this.$source.find('option').each(function() {
         var option = $(this);
-        if (option.val() === '') { // value가 없을 경우 placeholder로 사용, map에 담지 않고 return
+        var text = "";
+        if (option.val() === '') {
           that.options.placeholder = option.text();
           return;
         }
-        map[option.text()] = option.val(); // {Alabama: "AL"}
-//        source.push(option.val() + " : " + option.text()); // val + text type
-        source.push(option.text()); // text를 저장
-        if (option.prop('selected')) { //option이 selected 일 경우 selected는 text, selectedValue는 val를 저장
+        // valnText (for masterdata)
+        if (that.options.valnText) {
+          text = option.text()
+        } else {
+          text = option.val() + " : " + option.text(); // val + text type
+        }
+        map[text] = option.val(); // {Alabama: "AL"}
+        source.push(text);
+        if (option.prop('selected')) {
           selected = option.text();
           selectedValue = option.val();
-//          selectedIndex = option.index();
         }
       })
       this.map = map;
-      if (selected) { //selected가 있을 경우 
-        this.$element.val(selected); //보이는 input에는 text를 표시
-        this.$target.val(selectedValue); // hidden (즉 name을 계승한) input에는 val를 표시 
-        this.$container.addClass('combobox-selected'); // container에는 combobox-selected를 표시해준다
-        this.selected = true; //selected에 select 됐다고 true처리
+      if (selected) {
+        this.$element.val(selected);
+        this.$target.val(selectedValue);
+//        this.$container.addClass('combobox-selected'); // Remove 표시 안되게 하는 key
+        this.selected = true;
       }
-      
-    
-      return source; //text array를 리턴
+      return source;
     }
-/* source의 것을 element로 이동
-  - placeholder : placeholder or option에 value없는 text를 사용
-  - name
-  - required : 필수 입력 여부
-  - rel
-  - title
-  - class
-  - tabindex : 'tab'누를 때 이동 순서 (element로 옮기고 source것을 삭제)
-  - disable : element를 선택 못하게 
-*/
+
   , transferAttributes: function() {
     this.options.placeholder = this.$source.attr('data-placeholder') || this.options.placeholder
     if(this.options.appendId !== "undefined") {
@@ -159,7 +149,7 @@
         , left: pos.left
         })
         .show();
-      
+
       $('.dropdown-menu').on('mousedown', $.proxy(this.scrollSafety, this));
 
       this.shown = true;
@@ -179,23 +169,20 @@
       return this.process(this.source);
     }
 
-    /* input에 입력하는 값이 있는 text를 조회*/
   , process: function (items) {
       var that = this;
-    
-      if (1==2) { // livesearch 여부 넣기
+
+      if (1==2) {
         items = $.grep(items, function (item) {
           return that.matcher(item);
         })
+
         items = this.sorter(items);
-
       }
-
       if (!items.length) {
         return this.shown ? this.hide() : this;
       }
 
-      // items.slice(0, this.options.items)는 input에 match되는 값이 있는 text를 뿌려줌
       return this.render(items.slice(0, this.options.items)).show();
     }
 
@@ -204,13 +191,11 @@
         return '<div class="combobox-container"><input type="hidden" /> <div class="input-append"> <input type="text" autocomplete="off" /> <span class="add-on dropdown-toggle" data-dropdown="dropdown"> <span class="caret"/> <i class="icon-remove"/> </span> </div> </div>'
       } else {
         return '<div class="combobox-container"> <input type="hidden" /> <div class="input-group"> <input type="text" autocomplete="off" /> <div class="input-group-btn"> <button type="button" class="btn btn-primary dropdown-toggle" data-dropdown="dropdown"> <span class="caret" /> <span class="glyphicon glyphicon-remove" /> </button> </div> </div>'
-//        return '<div class="combobox-container"> <input type="hidden" /> <div class="input-group"> <input type="text" autocomplete="off" /> <span class="input-group-addon dropdown-toggle" data-dropdown="dropdown"> <span class="caret" /> <span class="glyphicon glyphicon-remove" /> </span> </div> </div>'
       }
     }
 
   , matcher: function (item) {
-//      return ~item.toLowerCase().indexOf(this.query.toLowerCase());
-      return item;
+      return ~item.toLowerCase().indexOf(this.query.toLowerCase());
     }
 
   , sorter: function (items) {
@@ -224,6 +209,7 @@
         else if (~item.indexOf(this.query)) {caseSensitive.push(item);}
         else {caseInsensitive.push(item);}
       }
+
       return beginswith.concat(caseSensitive, caseInsensitive);
     }
 
@@ -240,12 +226,12 @@
       items = $(items).map(function (i, item) {
         i = $(that.options.item).attr('data-value', item);
         i.find('a').html(that.highlighter(item));
+        return i[0];
+      })
 
-        return i[0];        
-      });        
-
-//      items.first().addClass('active');
+      items.first().addClass('active');
       this.$menu.html(items);
+    console.log(this.$menu);
       return this;
     }
 
@@ -294,12 +280,12 @@
       }
   }
   , clearElement: function () {
-//    this.$element.val('').focus();
+    this.$element.val('').focus();
   }
 
   , clearTarget: function () {
-//    this.$source.val('');
-//    this.$target.val('');
+    this.$source.val('');
+    this.$target.val('');
     this.$container.removeClass('combobox-selected');
     this.selected = false;
   }
@@ -309,7 +295,7 @@
   }
 
   , refresh: function () {
-    this.source = this.parse(); // option의 text를 받아서 source에 담는다
+    this.source = this.parse();
     this.options.items = this.source.length;
   }
 
@@ -381,7 +367,7 @@
               this.$menu.scrollTop(scrollTop + top);
           }
       }
-    }
+  }
 
   , keydown: function (e) {
       this.suppressKeyPressRepeat = ~$.inArray(e.keyCode, [40,38,9,13,27]);
@@ -422,13 +408,13 @@
           break;
 
         default:
-//          this.clearTarget();
-//          this.lookup();
+          this.clearTarget();
+          this.lookup();
       }
 
       e.stopPropagation();
       e.preventDefault();
-    }
+  }
 
   , focus: function (e) {
       this.focused = true;
@@ -439,9 +425,9 @@
       this.focused = false;
       var val = this.$element.val();
       if (!this.selected && val !== '' ) {
-//        this.$element.val('');
+        this.$element.val('');
         this.$source.val('').trigger('change');
-//        this.$target.val('').trigger('change');
+        this.$target.val('').trigger('change');
       }
       if (!this.mousedover && this.shown) {setTimeout(function () { that.hide(); }, 200);}
     }
@@ -470,6 +456,8 @@
     return this.each(function () {
       var $this = $(this)
         , data = $this.data('combobox')
+        , search = $this.data('search')
+        , valnText = $this.data('valnText')
         , options = typeof option == 'object' && option;
       if(!data) {$this.data('combobox', (data = new Combobox(this, options)));}
       if (typeof option == 'string') {data[option]();}
@@ -480,10 +468,18 @@
     bsVersion: '4'
   , menu: '<ul class="typeahead typeahead-long dropdown-menu"></ul>'
   , item: '<li><a href="#" class="dropdown-item"></a></li>'
-  , subtext: '<small class="text-muted"></small>'  //data-subtext
-  , showSubtext: false //data-subtext
+  , search: true
+  , valnText: false
   };
 
   $.fn.combobox.Constructor = Combobox;
+
+  // COMBOBOX DATA-API
+  // =====================
+  $(window).on('load.bs.select.data-api', function () {
+    $('.combobox').each(function () {
+      $(this).combobox();
+    })
+  });
 
 }( window.jQuery ));

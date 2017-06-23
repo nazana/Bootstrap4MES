@@ -121,6 +121,13 @@
       position: relative;
       display: inline-block;
     }
+    ul.nav>li>a {
+    display: inline-block;
+      width: 140px
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    }
   </style>
 </head>
 
@@ -150,6 +157,17 @@
     <div id="conditionArea" class="collapse in">
       <div class="well">
         <div class="row">
+         <select class="selectpicker" data-container="body" data-live-search="true">
+          <option data-subtext="머스터드">M</option>
+          <option data-subtext="Heinz">Ketchup</option>
+          <option data-subtext="Sweet">Relish</option>
+          <option data-subtext="Miracle Whip">Mayonnaise</option>
+          <option data-divider="true"></option>
+          <option data-subtext="Honey">Barbecue Sauce</option>
+          <option data-subtext="Ranch">Salad Dressing</option>
+          <option data-subtext="Sweet &amp; Spicy">Tabasco</option>
+          <option data-subtext="Chunky">Salsa</option>
+        </select>
           <div class="col-md-2 col-sm-4 col-xs-6">
             <div class="form-group">
               <label class="control-label center-block" for="FacOpCd">공장</label>
