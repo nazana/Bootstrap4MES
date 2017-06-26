@@ -81,15 +81,7 @@
         <h2 id="key-words">Key words</h2>
         <p>Add key words to options to improve their searchability using <code>data-tokens</code>.</p>
         <div class="bs-docs-example">
-          <select class="selectpicker" multiple name="normal" data-live-search="true">
-            <option data-tokens="ketchup mustard">Hot Dog, Fries and a Soda</option>
-            <option data-tokens="mustard">Burger, Shake and a Smile</option>
-            <option data-tokens="frosting">Sugar, Spice and all things nice</option>
-          </select>
-        </div>
-      </div>
-      <div>
-        
+          <select class="selectpicker" name="normal" data-live-search="true">
             <option value="AL" selected="selected">Alabama</option>
             <option value="AK">Alaska</option>
             <option value="AZ">Arizona</option>
@@ -141,8 +133,53 @@
             <option value="WV">West Virginia</option>
             <option value="WI">Wisconsin</option>
             <option value="WY">Wyoming</option>
+          </select>
+        </div>
+        <div>
+          <option data-tokens="ketchup mustard">Hot Dog, Fries and a Soda</option>
+          <option data-tokens="mustard">Burger, Shake and a Smile</option>
+          <option data-tokens="frosting">Sugar, Spice and all things nice</option>
+        </div>
       </div>
     </div>
+    <div class="row">
+      <div class="input-group">
+<!--        <input type="hidden" value="Alabama">-->
+        <input type="text" class="form-control" autocomplete="off" role="textbox" aria-label="Search" title="Alabama">
+        <div class="input-group-btn">
+          <button type="button" class="btn dropdown-toggle btn-default" data-toggle="dropdown" role="button" title="Alabama">
+            <span class="filter-option pull-left"></span>
+            &nbsp;
+            <span class="bs-caret">
+              <span class="caret"></span>
+            </span>
+          </button>
+<!--          <div class="dropdown-menu open dropdown-menu-right" role="combobox">-->
+            <ul class="dropdown-menu inner" role="listbox" aria-expanded="false">
+              <li data-original-index="0" class="selected"><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="true"><span class="text">Alabama</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+              <li data-original-index="1"><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">Alaska</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+              <li data-original-index="2"><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">Arizona</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+            </ul>
+<!--          </div>-->
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-group">
+        <input type="text" class="form-control" aria-label="...">
+        <div class="input-group-btn">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+          </ul>
+        </div><!-- /btn-group -->
+      </div><!-- /input-group -->
+    </div><!-- /.col-lg-6 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/bootstrap-select.js"></script>

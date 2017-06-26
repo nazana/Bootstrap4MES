@@ -1683,8 +1683,9 @@
 
     keydown: function (e) {
       var $this = $(this),
-          $parent = $this.is('input') ? $this.parent().parent() : $this.parent(),
-//          $parent = $this.is('input') ? $this.parent() : $this.parent(),
+          // 추가 parent는 dropdown-menu open
+//          $parent = $this.is('input') ? $this.parent().parent() : $this.parent(),
+          $parent = $this.is('input') ? $this.parent().find('.dropdown-menu.open') : $this.parent(),
           $items,
           that = $parent.data('this'),
           index,
@@ -1746,19 +1747,23 @@
             104: '8',
             105: '9'
           };
-
-      if (that.options.liveSearch) $parent = $this.parent().parent();
+      // 추가 상위 parent 위치에 따른 변경
+      this.$menu.show();
+//      if (that.options.liveSearch) $parent = $this.parent().parent();
+      if (that.options.liveSearch) $parent = $this.parent().find('.dropdown-menu.open');
 
       if (that.options.container) $parent = that.$menu;
 
       $items = $('[role="listbox"] li', $parent);
 
       isActive = that.$newElement.hasClass('open');
+      console.log("THIS1");
 
       if (!isActive && (e.keyCode >= 48 && e.keyCode <= 57 || e.keyCode >= 96 && e.keyCode <= 105 || e.keyCode >= 65 && e.keyCode <= 90)) {
         if (!that.options.container) {
           that.setSize();
-          that.$menu.parent().addClass('open');
+          console.log("THIS2");
+          that.$menu.parent().parent().parent().addClass('open');
           isActive = true;
         } else {
           that.$button.trigger('click');
@@ -1768,6 +1773,7 @@
       }
 
       if (that.options.liveSearch) {
+          console.log("THIS3");
         if (/(^9$|27)/.test(e.keyCode.toString(10)) && isActive) {
           e.preventDefault();
           e.stopPropagation();
@@ -1871,6 +1877,7 @@
 
       // Select focused option if "Enter", "Spacebar" or "Tab" (when selectOnTab is true) are pressed inside the menu.
       if ((/(13|32)/.test(e.keyCode.toString(10)) || (/(^9$)/.test(e.keyCode.toString(10)) && that.options.selectOnTab)) && isActive) {
+        console.log("Click");
         if (!/(32)/.test(e.keyCode.toString(10))) e.preventDefault();
         if (!that.options.liveSearch) {
           var elem = $(':focus');
@@ -1889,7 +1896,9 @@
       }
 
       if ((/(^9$|27)/.test(e.keyCode.toString(10)) && isActive && (that.multiple || that.options.liveSearch)) || (/(27)/.test(e.keyCode.toString(10)) && !isActive)) {
-        that.$menu.parent().removeClass('open');
+        // menu 위치 변경에 따른 변경
+        that.$menu.parent().parent().parent().removeClass('open');
+//        that.$menu.parent().removeClass('open');
         if (that.options.container) that.$newElement.removeClass('open');
         that.$button.focus();
       }
