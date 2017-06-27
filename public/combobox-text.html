@@ -26,3 +26,22 @@
   </div>
 </body>
 </html>
+
+
+1. option설정을 해주고
+2. template을 만들어 줍니다.
+  - 만약 option에 있으면 option것을 없으면 내가 만든 것을 씁니다.
+  - template에는 container와 hidden input, 그리고 input group (input + add-on) 이 있습니다.
+3. setup()을 통해 기존 selectlist위에 만들어진 template을 얹고 숨겨줍니다.
+   before로 담아준거는 같은 위치? 혹은 상위단에 넣어주는 것입니다.
+   setup()은 $container에 담아둡니다.
+4. 참. 여기서 this.$source = $(element) 라는 것이 있습니다.
+   $는 jQuery이고 element는 combobox를 사용한 요소입니다. 즉 selectlist겠죠.
+   $()는 괄호안에 넣으면 jQuery의 요소를 사용할 수 있어서 그렇게 쌓아둡니다.
+5. $element는 눈에 보이는 input form입니다.
+   $target은 눈에 보이지 않는 input form입니다.
+   $button은 dropdown menu를 열어줄 (toggle) Key가 되는 class입니다. (.dropdown-toggle)
+   $menu는 뭐지? body> 태그 맨뒤에 붙여줘요 append는 앞에 정의된 셀렉터의 자식요소에 붙여주구요
+                                        appendTo는 뒤에 정의된 셀렉터의 자식요소에 붙여줘요.
+
+6. 
