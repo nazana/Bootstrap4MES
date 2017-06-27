@@ -40,6 +40,7 @@
     this.refresh();
     this.transferAttributes();
     this.listen();
+//    console.log(this);
   };
 
   Combobox.prototype = {
@@ -66,6 +67,7 @@
       this.disabled = false;
       this.$container.removeClass('combobox-disabled');
     }
+
   , parse: function () {
       var that = this
         , map = {}
@@ -74,12 +76,19 @@
         , selectedValue = '';
       this.$source.find('option').each(function() {
         var option = $(this);
+        var text = "";
         if (option.val() === '') {
           that.options.placeholder = option.text();
           return;
         }
-        map[option.text()] = option.val();
-        source.push(option.text());
+        // valnText (for masterdata)
+        if (that.options.valnText) {
+          text = option.text()
+        } else {
+          text = option.val() + " : " + option.text(); // val + text type
+        }
+        map[text] = option.val(); // {Alabama: "AL"}
+        source.push(text);
         if (option.prop('selected')) {
           selected = option.text();
           selectedValue = option.val();
@@ -89,7 +98,7 @@
       if (selected) {
         this.$element.val(selected);
         this.$target.val(selectedValue);
-        this.$container.addClass('combobox-selected');
+//        this.$container.addClass('combobox-selected'); // Remove 표시 안되게 하는 key
         this.selected = true;
       }
       return source;
@@ -119,7 +128,7 @@
       this.$element.val(this.updater(val)).trigger('change');
       this.$target.val(this.map[val]).trigger('change');
       this.$source.val(this.map[val]).trigger('change');
-      this.$container.addClass('combobox-selected');
+//      this.$container.addClass('combobox-selected'); // Remove 표시 안되게 하는 key
       this.selected = true;
       return this.hide();
     }
@@ -163,12 +172,13 @@
   , process: function (items) {
       var that = this;
 
-      items = $.grep(items, function (item) {
-        return that.matcher(item);
-      })
+      if (1==2) {
+        items = $.grep(items, function (item) {
+          return that.matcher(item);
+        })
 
-      items = this.sorter(items);
-
+        items = this.sorter(items);
+      }
       if (!items.length) {
         return this.shown ? this.hide() : this;
       }
@@ -180,7 +190,7 @@
       if (this.options.bsVersion == '2') {
         return '<div class="combobox-container"><input type="hidden" /> <div class="input-append"> <input type="text" autocomplete="off" /> <span class="add-on dropdown-toggle" data-dropdown="dropdown"> <span class="caret"/> <i class="icon-remove"/> </span> </div> </div>'
       } else {
-        return '<div class="combobox-container"> <input type="hidden" /> <div class="input-group"> <input type="text" autocomplete="off" /> <span class="input-group-addon dropdown-toggle" data-dropdown="dropdown"> <span class="caret" /> <span class="glyphicon glyphicon-remove" /> </span> </div> </div>'
+        return '<div class="combobox-container"> <input type="hidden" /> <div class="input-group"> <input type="text" autocomplete="off" /> <div class="input-group-btn"> <button type="button" class="btn btn-primary dropdown-toggle" data-dropdown="dropdown"> <span class="caret" /> <span class="glyphicon glyphicon-remove" /> </button> </div> </div>'
       }
     }
 
@@ -221,6 +231,7 @@
 
       items.first().addClass('active');
       this.$menu.html(items);
+    console.log(this.$menu);
       return this;
     }
 
@@ -356,7 +367,7 @@
               this.$menu.scrollTop(scrollTop + top);
           }
       }
-    }
+  }
 
   , keydown: function (e) {
       this.suppressKeyPressRepeat = ~$.inArray(e.keyCode, [40,38,9,13,27]);
@@ -403,7 +414,7 @@
 
       e.stopPropagation();
       e.preventDefault();
-    }
+  }
 
   , focus: function (e) {
       this.focused = true;
@@ -445,6 +456,8 @@
     return this.each(function () {
       var $this = $(this)
         , data = $this.data('combobox')
+        , search = $this.data('search')
+        , valnText = $this.data('valnText')
         , options = typeof option == 'object' && option;
       if(!data) {$this.data('combobox', (data = new Combobox(this, options)));}
       if (typeof option == 'string') {data[option]();}
@@ -455,8 +468,18 @@
     bsVersion: '4'
   , menu: '<ul class="typeahead typeahead-long dropdown-menu"></ul>'
   , item: '<li><a href="#" class="dropdown-item"></a></li>'
+  , search: true
+  , valnText: false
   };
 
   $.fn.combobox.Constructor = Combobox;
+
+  // COMBOBOX DATA-API
+  // =====================
+  $(window).on('load.bs.select.data-api', function () {
+    $('.combobox').each(function () {
+      $(this).combobox();
+    })
+  });
 
 }( window.jQuery ));
