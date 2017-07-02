@@ -400,9 +400,8 @@
       this.$button = this.$newElement.children('button');
       this.$menu = this.$newElement.children('.dropdown-menu');
       this.$menuInner = this.$menu.children('.inner');
-//      this.$searchbox = this.$menu.find('input');
-      this.$searchbox = this.$newElement.parent().find('input'); //추가
-      console.log(this.$searchbox);
+      this.$searchbox = this.$menu.find('input');
+
       this.$element.removeClass('bs-select-hidden');
 
       if (this.options.dropdownAlignRight === true) this.$menu.addClass('dropdown-menu-right');
@@ -478,7 +477,6 @@
       // If we are multiple or showTick option is set, then add the show-tick class
       var showTick = (this.multiple || this.options.showTick) ? ' show-tick' : '',
           inputGroup = this.$element.parent().hasClass('input-group') ? ' input-group-btn' : '',
-          selectText = this.$element.parent().hasClass('input-group') ? '' : '<span class="filter-option pull-left"></span>&nbsp;', //추가
           autofocus = this.autofocus ? ' autofocus' : '';
       // Elements
       var header = this.options.header ? '<div class="popover-title"><button type="button" class="close" aria-hidden="true">&times;</button>' + this.options.header + '</div>' : '';
@@ -512,14 +510,14 @@
       var drop =
           '<div class="btn-group bootstrap-select' + showTick + inputGroup + '">' +
           '<button type="button" class="' + this.options.styleBase + ' dropdown-toggle" data-toggle="dropdown"' + autofocus + ' role="button">' +
-          selectText + 
+          '<span class="filter-option pull-left"></span>&nbsp;' +
           '<span class="bs-caret">' +
           this.options.template.caret +
           '</span>' +
           '</button>' +
-          '<div class="dropdown-menu open dropdown-menu-right" role="combobox">' +
+          '<div class="dropdown-menu open" role="combobox">' +
           header +
-//          searchbox +
+          searchbox +
           actionsbox +
           '<ul class="dropdown-menu inner" role="listbox" aria-expanded="false">' +
           '</ul>' +
@@ -809,9 +807,6 @@
       //strip all HTML tags and trim the result, then unescape any escaped tags
       this.$button.attr('title', htmlUnescape($.trim(title.replace(/<[^>]*>?/g, ''))));
       this.$button.children('.filter-option').html(title);
-      if(this.$newElement.parent().hasClass('input-group')) {
-        this.$newElement.parent().find('input').val(title);
-      }
 
       this.$element.trigger('rendered.bs.select');
     },
@@ -854,7 +849,7 @@
 
       text.className = 'text';
       newElement.className = this.$menu[0].parentNode.className + ' open';
-      menu.className = 'dropdown-menu open dropdown-menu-right';
+      menu.className = 'dropdown-menu open';
       menuInner.className = 'dropdown-menu inner';
       divider.className = 'divider';
 

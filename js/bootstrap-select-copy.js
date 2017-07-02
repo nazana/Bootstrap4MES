@@ -299,6 +299,9 @@
     this.$menu = null;
     this.$lis = null;
     this.options = options;
+    // 추가 combobox용 input form
+    this.$text = null;
+    this.$hidden = null;
 
     // If we have no title yet, try to pull it from the html title attribute (jQuery doesnt' pick it up as it's not a
     // data-attribute)
@@ -397,11 +400,23 @@
       this.$element
         .after(this.$newElement)
         .appendTo(this.$newElement);
-      this.$button = this.$newElement.children('button');
-      this.$menu = this.$newElement.children('.dropdown-menu');
-      this.$menuInner = this.$menu.children('.inner');
-      this.$searchbox = this.$menu.find('input');
+      // 추가 button을 찾기 위함
+//      this.$button = this.$newElement.children('button');
+      this.$button = this.$newElement.find('button');
+      // 추가 dropdown-menu위에 div하나가 더 있음
+//      this.$menu = this.$newElement.children('.dropdown-menu');
+//      this.$menuInner = this.$menu.children('.inner');
+      this.$menu = this.$newElement.find('.dropdown-menu');
+      this.$menuInner = this.$menu.find('.inner');
+      console.log(this.$newElement);
+      console.log(this.$menu[0]);
+//      this.$searchbox = this.$menu.find('input');
 
+      //추가 combobox용 input form
+      this.$searchbox = this.$newElement.find('input[type=text]');
+      this.$text = this.$newElement.find('input[type=text]');
+      this.$hidden = this.$newElement.find('input[type=hidden]');
+      
       this.$element.removeClass('bs-select-hidden');
 
       if (this.options.dropdownAlignRight === true) this.$menu.addClass('dropdown-menu-right');
@@ -466,7 +481,20 @@
           });
         });
       }
-
+/*
+      console.log("this.$element");
+      console.log(this.$element);
+      console.log("this.$newElement");
+      console.log(this.$newElement);
+      console.log("this.$button");
+      console.log(this.$button);
+      console.log("this.$menu");
+      console.log(this.$menu);
+      console.log("this.$lis");
+      console.log(this.$lis);
+      console.log("this.options");
+      console.log(this.options);
+*/
       setTimeout(function () {
         that.$element.trigger('loaded.bs.select');
       });
@@ -488,7 +516,7 @@
           : '';
       var actionsbox = this.multiple && this.options.actionsBox ?
       '<div class="bs-actionsbox">' +
-      '<div class="btn-group btn-group-sm btn-block">' +
+      '<div class="btn-group btn-group-lg btn-block">' +
       '<button type="button" class="actions-btn bs-select-all btn btn-default">' +
       this.options.selectAllText +
       '</button>' +
@@ -501,12 +529,37 @@
       var donebutton = this.multiple && this.options.doneButton ?
       '<div class="bs-donebutton">' +
       '<div class="btn-group btn-block">' +
-      '<button type="button" class="btn btn-sm btn-default">' +
+      '<button type="button" class="btn btn-lg btn-default">' +
       this.options.doneButtonText +
       '</button>' +
       '</div>' +
       '</div>'
           : '';
+      var combobox = 
+          '<div class="btn-group bootstrap-select' + showTick + '">' +
+            '<input type="hidden" />' +
+            '<div class="input-group">' +
+              '<input type="text" class="form-control bs-searchbox" autocomplete="off"' +
+              (null === this.options.liveSearchPlaceholder ? '' : ' placeholder="' + htmlEscape(this.options.liveSearchPlaceholder) + '"') + ' role="textbox" aria-label="Search">' +
+//              '<input type="text"  class="form-control filter-option" autocomplete="off" />' +
+              '<div class="input-group-btn">' +
+                '<button type="button" class="' + this.options.styleBase + ' dropdown-toggle" data-toggle="dropdown"' + autofocus + ' role="button">' +
+                  '<span class="filter-option pull-left"></span>&nbsp;' +
+                  '<span class="bs-caret">' +
+                  this.options.template.caret +
+                  '</span>' +
+                '</button>' +
+                '<div class="dropdown-menu open dropdown-menu-right" role="combobox">' +
+                  header +
+//                  searchbox +
+                  actionsbox +
+                  '<ul class="dropdown-menu inner" role="listbox" aria-expanded="false">' +
+                  '</ul>' +
+                  donebutton +
+                '</div>' +
+              '</div>' +
+            '</div>' +
+          '</div>';
       var drop =
           '<div class="btn-group bootstrap-select' + showTick + inputGroup + '">' +
           '<button type="button" class="' + this.options.styleBase + ' dropdown-toggle" data-toggle="dropdown"' + autofocus + ' role="button">' +
@@ -525,7 +578,7 @@
           '</div>' +
           '</div>';
 
-      return $(drop);
+      return $(combobox);
     },
 
     createView: function () {
@@ -806,7 +859,14 @@
 
       //strip all HTML tags and trim the result, then unescape any escaped tags
       this.$button.attr('title', htmlUnescape($.trim(title.replace(/<[^>]*>?/g, ''))));
-      this.$button.children('.filter-option').html(title);
+      // 추가 Button 연결 제거
+//      this.$button.children('.filter-option').html(title);
+      // 추가 input tag 내부 data
+      this.$searchbox.attr('title', htmlUnescape($.trim(title.replace(/<[^>]*>?/g, ''))));
+      this.$searchbox.val(title);
+//      this.$text.attr('title', htmlUnescape($.trim(title.replace(/<[^>]*>?/g, ''))));
+//      this.$text.val(title);
+      this.$hidden.val(title);
 
       this.$element.trigger('rendered.bs.select');
     },
@@ -819,9 +879,10 @@
       if (this.$element.attr('class')) {
         this.$newElement.addClass(this.$element.attr('class').replace(/selectpicker|mobile-device|bs-select-hidden|validate\[.*\]/gi, ''));
       }
-
       var buttonClass = style ? style : this.options.style;
 
+//console.log("style : " + buttonClass);
+      
       if (status == 'add') {
         this.$button.addClass(buttonClass);
       } else if (status == 'remove') {
@@ -830,11 +891,68 @@
         this.$button.removeClass(this.options.style);
         this.$button.addClass(buttonClass);
       }
+      
     },
 
     liHeight: function (refresh) {
       if (!refresh && (this.options.size === false || this.sizeInfo)) return;
-
+//
+//      var combobox = 
+//          '<div class="btn-group bootstrap-select' + showTick + '">' +
+//            '<input type="hidden" />' +
+//            '<div class="input-group">' +
+//              '<input type="text"  class="form-control filter-option" autocomplete="off" />' +
+//              '<div class="input-group-btn">' +
+//                '<button type="button" class="' + this.options.styleBase + ' dropdown-toggle" data-toggle="dropdown"' + autofocus + ' role="button">' +
+//                  '<span class="filter-option pull-left"></span>&nbsp;' +
+//                  '<span class="bs-caret">' +
+//                  this.options.template.caret +
+//                  '</span>' +
+//                '</button>' +
+//                '<div class="dropdown-menu open" role="combobox">' +
+//                  header +
+////                  searchbox +
+//                  actionsbox +
+//                  '<ul class="dropdown-menu inner" role="listbox" aria-expanded="false">' +
+//                  '</ul>' +
+//                  donebutton +
+//                '</div>' +
+//              '</div>' +
+//            '</div>' +
+//          '</div>';
+//
+//      var drop =
+//          '<div class="btn-group bootstrap-select' + showTick + inputGroup + '">' +
+//            '<button type="button" class="' + this.options.styleBase + ' dropdown-toggle" data-toggle="dropdown"' + autofocus + ' role="button">' +
+//              '<span class="filter-option pull-left"></span>&nbsp;' +
+//              '<span class="bs-caret">' +
+//              this.options.template.caret +
+//              '</span>' +
+//            '</button>' +
+//            '<div class="dropdown-menu open" role="combobox">' +
+//              header +
+//              searchbox +
+//              actionsbox +
+//              '<ul class="dropdown-menu inner" role="listbox" aria-expanded="false">' +
+//              '</ul>' +
+//              donebutton +
+//            '</div>' +
+//          '</div>';
+//
+//      <div>
+//        <div>
+//          <ul>
+//            <li>
+//              <a>
+//                <span></span>
+//              </a>
+//            </li>
+//          </ul>
+//        </div>
+//      </div>
+//      
+//      header = 
+//      
       var newElement = document.createElement('div'),
           menu = document.createElement('div'),
           menuInner = document.createElement('ul'),
@@ -848,8 +966,10 @@
           doneButton = this.options.doneButton && this.multiple && this.$menu.find('.bs-donebutton').length > 0 ? this.$menu.find('.bs-donebutton')[0].cloneNode(true) : null;
 
       text.className = 'text';
-      newElement.className = this.$menu[0].parentNode.className + ' open';
-      menu.className = 'dropdown-menu open';
+      //추가 open 위치 select-picker와 맞춤
+//      newElement.className = this.$menu[0].parentNode.className + ' open';
+      newElement.className = this.$newElement.className + ' open';
+      menu.className = 'dropdown-menu open dropdown-menu-right';
       menuInner.className = 'dropdown-menu inner';
       divider.className = 'divider';
 
@@ -949,6 +1069,8 @@
             var pos = that.$newElement.offset(),
                 $container = $(that.options.container),
                 containerPos;
+//            pos = {top: 502, left: 39.5}
+//            console.log(pos);
 
             if (that.options.container && !$container.is('body')) {
               containerPos = $container.offset();
@@ -1048,6 +1170,7 @@
           //noinspection JSUnusedAssignment
           this.$newElement.toggleClass('dropup', selectOffsetTop > selectOffsetBot && (menuHeight - menuExtras.vert) < getHeight);
         }
+
         $menu.css({
           'max-height': menuHeight + headerHeight + searchHeight + actionsHeight + doneButtonHeight + 'px',
           'overflow': 'hidden',
@@ -1125,6 +1248,7 @@
           };
 
       this.$button.on('click', function () {
+//        console.log("this");
         var $this = $(this);
 
         if (that.isDisabled()) {
@@ -1235,6 +1359,7 @@
       });
 
       this.$button.on('click', function () {
+//        console.log("this");
         that.setSize();
       });
 
@@ -1420,6 +1545,7 @@
           $no_results = $('<li class="no-results"></li>');
 
       this.$button.on('click.dropdown.data-api', function () {
+//        console.log("this");
         that.$menuInner.find('.active').removeClass('active');
         if (!!that.$searchbox.val()) {
           that.$searchbox.val('');
@@ -1557,7 +1683,9 @@
 
     keydown: function (e) {
       var $this = $(this),
-          $parent = $this.is('input') ? $this.parent().parent() : $this.parent(),
+          // 추가 parent는 dropdown-menu open
+//          $parent = $this.is('input') ? $this.parent().parent() : $this.parent(),
+          $parent = $this.is('input') ? $this.parent().find('.dropdown-menu.open') : $this.parent(),
           $items,
           that = $parent.data('this'),
           index,
@@ -1619,20 +1747,23 @@
             104: '8',
             105: '9'
           };
-      if (that.options.liveSearch) $parent = $this.parent().parent();
-      
+      // 추가 상위 parent 위치에 따른 변경
+      this.$menu.show();
+//      if (that.options.liveSearch) $parent = $this.parent().parent();
+      if (that.options.liveSearch) $parent = $this.parent().find('.dropdown-menu.open');
+
       if (that.options.container) $parent = that.$menu;
 
       $items = $('[role="listbox"] li', $parent);
 
       isActive = that.$newElement.hasClass('open');
+      console.log("THIS1");
 
-          console.log(that.$menu.parent());
       if (!isActive && (e.keyCode >= 48 && e.keyCode <= 57 || e.keyCode >= 96 && e.keyCode <= 105 || e.keyCode >= 65 && e.keyCode <= 90)) {
         if (!that.options.container) {
           that.setSize();
-          that.$menu.parent().addClass('open');
-          console.log(that.$menu.parent());
+          console.log("THIS2");
+          that.$menu.parent().parent().parent().addClass('open');
           isActive = true;
         } else {
           that.$button.trigger('click');
@@ -1642,6 +1773,7 @@
       }
 
       if (that.options.liveSearch) {
+          console.log("THIS3");
         if (/(^9$|27)/.test(e.keyCode.toString(10)) && isActive) {
           e.preventDefault();
           e.stopPropagation();
@@ -1745,6 +1877,7 @@
 
       // Select focused option if "Enter", "Spacebar" or "Tab" (when selectOnTab is true) are pressed inside the menu.
       if ((/(13|32)/.test(e.keyCode.toString(10)) || (/(^9$)/.test(e.keyCode.toString(10)) && that.options.selectOnTab)) && isActive) {
+        console.log("Click");
         if (!/(32)/.test(e.keyCode.toString(10))) e.preventDefault();
         if (!that.options.liveSearch) {
           var elem = $(':focus');
@@ -1763,7 +1896,9 @@
       }
 
       if ((/(^9$|27)/.test(e.keyCode.toString(10)) && isActive && (that.multiple || that.options.liveSearch)) || (/(27)/.test(e.keyCode.toString(10)) && !isActive)) {
-        that.$menu.parent().removeClass('open');
+        // menu 위치 변경에 따른 변경
+        that.$menu.parent().parent().parent().removeClass('open');
+//        that.$menu.parent().removeClass('open');
         if (that.options.container) that.$newElement.removeClass('open');
         that.$button.focus();
       }
@@ -1877,8 +2012,11 @@
 
   $(document)
       .data('keycount', 0)
-      .on('keydown.bs.select', '.bootstrap-select [data-toggle=dropdown], .bootstrap-select [role="listbox"], .bs-searchbox input', Selectpicker.prototype.keydown)
-      .on('focusin.modal', '.bootstrap-select [data-toggle=dropdown], .bootstrap-select [role="listbox"], .bs-searchbox input', function (e) {
+//      .on('keydown.bs.select', '.bootstrap-select [data-toggle=dropdown], .bootstrap-select [role="listbox"], .bs-searchbox input', Selectpicker.prototype.keydown)
+//      .on('focusin.modal', '.bootstrap-select [data-toggle=dropdown], .bootstrap-select [role="listbox"], .bs-searchbox input', function (e) {
+      .on('keydown.bs.select', '.bootstrap-select [data-toggle=dropdown], .bootstrap-select [role="listbox"], .bs-searchbox', Selectpicker.prototype.keydown)
+      .on('focusin.modal', '.bootstrap-select [data-toggle=dropdown], .bootstrap-select [role="listbox"], .bs-searchbox', function (e) {
+//    alert("click");
         e.stopPropagation();
       });
 
