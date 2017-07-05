@@ -1413,7 +1413,6 @@
       });
 
       this.$element.change(function () {
-        console.log("THIS2");
         that.render(false);
         that.$element.trigger('changed.bs.select', changed_arguments);
         changed_arguments = null;
@@ -1428,14 +1427,14 @@
         that.$menuInner.find('.active').removeClass('active');
         if (!!that.$searchbox.val()) {
           //추가 combobox searchbox data입력시 searchbox value 삭제 제거
-//          that.$searchbox.val('');
+          that.$searchbox.val('');
           that.$lis.not('.is-hidden').removeClass('hidden');
           if (!!$no_results.parent().length) $no_results.remove();
         }
         if (!that.multiple) that.$menuInner.find('.selected').addClass('active');
         setTimeout(function () {
           //수정하기
-//          that.$searchbox.focus();
+          that.$searchbox.focus();
         }, 10);
       });
 
@@ -1725,6 +1724,7 @@
           $items.eq(index).children('a').focus();
         } else {
           e.preventDefault();
+          console.log($this);
           // 추가 Why use this "!$this.hasClass('dropdown-toggle')"
 //          if (!$this.hasClass('dropdown-toggle')) {
             $items.removeClass('active').eq(index).addClass('active').children('a').focus();
