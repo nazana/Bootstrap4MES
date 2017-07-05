@@ -391,6 +391,7 @@
       // store originalIndex (key) and newIndex (value) in this.liObj for fast accessibility
       // allows us to do this.$lis.eq(that.liObj[index]) instead of this.$lis.filter('[data-original-index="' + index + '"]')
       this.liObj = {};
+      this.inputGroup = this.$element.parent().hasClass('input-group') ? true : false;
       this.multiple = this.$element.prop('multiple');
       this.autofocus = this.$element.prop('autofocus');
       this.$newElement = this.createView();
@@ -400,9 +401,7 @@
       this.$button = this.$newElement.children('button');
       this.$menu = this.$newElement.children('.dropdown-menu');
       this.$menuInner = this.$menu.children('.inner');
-//      this.$searchbox = this.$menu.find('input');
-      this.$searchbox = this.$newElement.parent().find('input'); //추가
-      console.log(this.$searchbox);
+      this.$searchbox = this.inputGroup ? this.$newElement.parent().find('input.combobox') : this.$menu.find('input'); //추가
       this.$element.removeClass('bs-select-hidden');
 
       if (this.options.dropdownAlignRight === true) this.$menu.addClass('dropdown-menu-right');
@@ -477,12 +476,12 @@
       // Options
       // If we are multiple or showTick option is set, then add the show-tick class
       var showTick = (this.multiple || this.options.showTick) ? ' show-tick' : '',
-          inputGroup = this.$element.parent().hasClass('input-group') ? ' input-group-btn' : '',
-          selectText = this.$element.parent().hasClass('input-group') ? '' : '<span class="filter-option pull-left"></span>&nbsp;', //추가
+          inputGroup = this.inputGroup ? ' input-group-btn' : '',
+          selectText = this.inputGroup ? '' : '<span class="filter-option pull-left"></span>&nbsp;',
           autofocus = this.autofocus ? ' autofocus' : '';
       // Elements
       var header = this.options.header ? '<div class="popover-title"><button type="button" class="close" aria-hidden="true">&times;</button>' + this.options.header + '</div>' : '';
-      var searchbox = this.options.liveSearch ?
+      var searchbox = (this.options.liveSearch && !this.inputGroup)?
       '<div class="bs-searchbox">' +
       '<input type="text" class="form-control" autocomplete="off"' +
       (null === this.options.liveSearchPlaceholder ? '' : ' placeholder="' + htmlEscape(this.options.liveSearchPlaceholder) + '"') + ' role="textbox" aria-label="Search">' +
@@ -513,13 +512,13 @@
           '<div class="btn-group bootstrap-select' + showTick + inputGroup + '">' +
           '<button type="button" class="' + this.options.styleBase + ' dropdown-toggle" data-toggle="dropdown"' + autofocus + ' role="button">' +
           selectText + 
-          '<span class="bs-caret">' +
+          '<span class="bs-caret">&nbsp;' +
           this.options.template.caret +
           '</span>' +
           '</button>' +
           '<div class="dropdown-menu open dropdown-menu-right" role="combobox">' +
           header +
-//          searchbox +
+          searchbox +
           actionsbox +
           '<ul class="dropdown-menu inner" role="listbox" aria-expanded="false">' +
           '</ul>' +
@@ -1414,6 +1413,7 @@
       });
 
       this.$element.change(function () {
+        console.log("THIS2");
         that.render(false);
         that.$element.trigger('changed.bs.select', changed_arguments);
         changed_arguments = null;
@@ -1427,13 +1427,15 @@
       this.$button.on('click.dropdown.data-api', function () {
         that.$menuInner.find('.active').removeClass('active');
         if (!!that.$searchbox.val()) {
-          that.$searchbox.val('');
+          //추가 combobox searchbox data입력시 searchbox value 삭제 제거
+//          that.$searchbox.val('');
           that.$lis.not('.is-hidden').removeClass('hidden');
           if (!!$no_results.parent().length) $no_results.remove();
         }
         if (!that.multiple) that.$menuInner.find('.selected').addClass('active');
         setTimeout(function () {
-          that.$searchbox.focus();
+          //수정하기
+//          that.$searchbox.focus();
         }, 10);
       });
 
@@ -1442,6 +1444,8 @@
       });
 
       this.$searchbox.on('input propertychange', function () {
+        //추가 combobox searchbox data입력시 dropdown-menu open
+        that.$menu.parent().addClass('open');
         that.$lis.not('.is-hidden').removeClass('hidden');
         that.$lis.filter('.active').removeClass('active');
         $no_results.remove();
@@ -1562,9 +1566,9 @@
 
     keydown: function (e) {
       var $this = $(this),
-          $parent = $this.is('input') ? $this.parent().parent() : $this.parent(),
+          $parent,// = $this.is('input') ? $this.parent().parent() : $this.parent(),
           $items,
-          that = $parent.data('this'),
+          that,// = $parent.data('this'),
           index,
           next,
           first,
@@ -1625,9 +1629,19 @@
             105: '9'
           };
 
-      if (that.options.liveSearch) $parent = $this.parent().parent();
+      //추가 combobox일 경우 처리
+      this.inputGroup = $this.is('input.combobox') ? true : false;
+      
+      if ($this.is('input')) {
+        $parent = this.inputGroup ? $this.next() : $this.parent().parent();
+      } else {
+        $parent = $this.parent();
+      }
+      that = $parent.data('this');
 
       if (that.options.container) $parent = that.$menu;
+      
+//      console.log($parent);
 
       $items = $('[role="listbox"] li', $parent);
 
@@ -1711,10 +1725,11 @@
           $items.eq(index).children('a').focus();
         } else {
           e.preventDefault();
-          if (!$this.hasClass('dropdown-toggle')) {
+          // 추가 Why use this "!$this.hasClass('dropdown-toggle')"
+//          if (!$this.hasClass('dropdown-toggle')) {
             $items.removeClass('active').eq(index).addClass('active').children('a').focus();
             $this.focus();
-          }
+//          }
         }
 
       } else if (!$this.is('input')) {
@@ -1733,6 +1748,7 @@
         count = $(document).data('keycount');
         count++;
         $(document).data('keycount', count);
+        console.log(count);
 
         prevKey = $.trim($(':focus').text().toLowerCase()).substring(0, 1);
 
@@ -1761,6 +1777,10 @@
           $(document).data('spaceSelect', true);
         } else if (!/(32)/.test(e.keyCode.toString(10))) {
           that.$menuInner.find('.active a').click();
+          //추가 input .combobox 일 경우 select 변경 없이도 값 입력
+          if (this.inputGroup) {
+            that.$element.trigger('change'); 
+          }
           $this.focus();
         }
         $(document).data('keycount', 0);
@@ -1881,8 +1901,8 @@
 
   $(document)
       .data('keycount', 0)
-      .on('keydown.bs.select', '.bootstrap-select [data-toggle=dropdown], .bootstrap-select [role="listbox"], .bs-searchbox input', Selectpicker.prototype.keydown)
-      .on('focusin.modal', '.bootstrap-select [data-toggle=dropdown], .bootstrap-select [role="listbox"], .bs-searchbox input', function (e) {
+      .on('keydown.bs.select', '.bootstrap-select [data-toggle=dropdown], .bootstrap-select [role="listbox"], input', Selectpicker.prototype.keydown)
+      .on('focusin.modal', '.bootstrap-select [data-toggle=dropdown], .bootstrap-select [role="listbox"], input', function (e) {
         e.stopPropagation();
       });
 
