@@ -1427,7 +1427,7 @@
         that.$menuInner.find('.active').removeClass('active');
         if (!!that.$searchbox.val()) {
           //추가 combobox searchbox data입력시 searchbox value 삭제 제거
-          that.$searchbox.val('');
+//          that.$searchbox.val('');
           that.$lis.not('.is-hidden').removeClass('hidden');
           if (!!$no_results.parent().length) $no_results.remove();
         }
@@ -1631,16 +1631,15 @@
       //추가 combobox일 경우 처리
       this.inputGroup = $this.is('input.combobox') ? true : false;
       
+      //combobox 사용시 selectpicker가 앞에 있을 경우 고려해서 수정 필요
       if ($this.is('input')) {
-        $parent = this.inputGroup ? $this.next() : $this.parent().parent();
+        $parent = this.inputGroup ? $this.parent().find(".btn-group.bootstrap-select.input-group-btn") : $this.parent().parent();
       } else {
         $parent = $this.parent();
       }
       that = $parent.data('this');
 
       if (that.options.container) $parent = that.$menu;
-      
-//      console.log($parent);
 
       $items = $('[role="listbox"] li', $parent);
 
@@ -1663,6 +1662,7 @@
           e.preventDefault();
           e.stopPropagation();
           that.$menuInner.click();
+          //ESC, TAB일 경우 dropdownmenu 내부 클릭으로 인식 및 button을 focus. 사용법 생각해보기
           that.$button.focus();
         }
         // $items contains li elements when liveSearch is enabled
@@ -1698,9 +1698,9 @@
           index = $items.index($items.filter('.active'));
           first = $items.first().data('index');
           last = $items.last().data('index');
-          next = $items.eq(index).nextAll().eq(0).data('index');
-          prev = $items.eq(index).prevAll().eq(0).data('index');
-          nextPrev = $items.eq(next).prevAll().eq(0).data('index');
+          next = $items.eq(index).nextAll(selector).eq(0).data('index');
+          prev = $items.eq(index).prevAll(selector).eq(0).data('index');
+          nextPrev = $items.eq(next).prevAll(selector).eq(0).data('index');
         }
 
         prevIndex = $this.data('prevIndex');
@@ -1724,12 +1724,11 @@
           $items.eq(index).children('a').focus();
         } else {
           e.preventDefault();
-          console.log($this);
           // 추가 Why use this "!$this.hasClass('dropdown-toggle')"
-//          if (!$this.hasClass('dropdown-toggle')) {
+          if (!$this.hasClass('dropdown-toggle')) {
             $items.removeClass('active').eq(index).addClass('active').children('a').focus();
             $this.focus();
-//          }
+          }
         }
 
       } else if (!$this.is('input')) {
