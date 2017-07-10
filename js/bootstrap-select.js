@@ -1658,6 +1658,12 @@
       }
 
       if (that.options.liveSearch) {
+        if (/(38|40)/.test(e.keyCode.toString(10)) && !isActive) {
+//          e.preventDefault();
+//          e.stopPropagation();
+//          that.$menu.parent().addClass('open');
+          that.$button.trigger('click');
+        }
         if (/(^9$|27)/.test(e.keyCode.toString(10)) && isActive) {
           e.preventDefault();
           e.stopPropagation();
